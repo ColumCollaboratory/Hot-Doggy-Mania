@@ -13,19 +13,14 @@ public class Ingredients : MonoBehaviour
     [SerializeField]
     private float fallingSpeed = 1;
 
+    private float conveyerSpeed = 3;
     private Vector2 nextPosition;
     private bool isFalling = false;
-    private bool canFall = true;
+    private bool canFall = false;
 
     public string GetName()
     {
         return name;
-    }
-
-    public void Fall()
-    {
-        nextPosition = new Vector2(0,this.transform.position.y - distanceBetweenConveyers);
-        isFalling = true;
     }
     
     // Start is called before the first frame update
@@ -39,27 +34,68 @@ public class Ingredients : MonoBehaviour
     {
         if(isFalling==true)
         {
-            if(this.transform.position.y>=nextPosition.y)
-            {
-                transform.Translate(new Vector2(0, -1) * Time.deltaTime*fallingSpeed);
-                Debug.Log("Ingredient Y Position: " + this.transform.position.y);
-                Debug.Log("Next Y Position: " + nextPosition.y);
-            }
-            else
-            {
-                isFalling = false;
-            }
-        }
-        else if(canFall==true&&Input.GetKeyDown(KeyCode.E))
-        {
             Fall();
         }
+        else
+        {
+            MoveOnConveyer();
+            if(canFall == true && Input.GetKeyDown(KeyCode.E))
+            {
+                nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
+                isFalling = true;
+            }
+        }
+    }
+
+    private void Fall()
+    {
+        if (this.transform.position.y >= nextPosition.y)
+        {
+            transform.Translate(new Vector2(0, -1) * Time.deltaTime * fallingSpeed);
+        }
+        else
+        {
+            isFalling = false;
+        }
+    }
+
+    private void MoveOnConveyer()
+    {
+        //TONS of hard coding here. Should probably fix.
+
+        //If object is moving below map, then it 
+        if(transform.position.y<-7)
+        {
+            Destroy(this.gameObject);
+        }
+        //MOVE LEFT
+        if (transform.position.y<-2||(transform.position.y>0&&transform.position.y<3)||transform.position.y>8)
+        {
+            transform.Translate(new Vector2(-1, 0) * Time.deltaTime * conveyerSpeed);
+            //Teleport to other side of screen when offscreen
+            if (transform.position.x < -23)
+            {
+                transform.position = new Vector2(23, transform.position.y);
+            }
+        }
+        else //MOVE RIGHT
+        {
+            transform.Translate(new Vector2(1,0) * Time.deltaTime * conveyerSpeed);
+            //Teleport to other side of screen when offscreen
+            if (transform.position.x > 23)
+            {
+                transform.position = new Vector2(-23, transform.position.y);
+            }
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Collided");
         if(collision.GetComponent<PlayerPathMover>())
         {
+            Debug.Log("Collided With Player");
             canFall = true;
         }
     }
