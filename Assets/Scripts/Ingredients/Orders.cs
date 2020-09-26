@@ -7,10 +7,12 @@ public class Orders : MonoBehaviour
     [SerializeField]
     private List<string> ingredientsNeeded;
 
+    private OrderManager orderManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        orderManager = GameObject.Find("OrderManager").GetComponent<OrderManager>();
     }
 
     // Update is called once per frame
@@ -39,17 +41,17 @@ public class Orders : MonoBehaviour
             if (ingredientFound == true)
             {
                 ingredientsNeeded.Remove(ingredient.GetName());
-                Debug.Log("+10 Points");
+                orderManager.AddPoints(10);
                 if (ingredientsNeeded.Count == 0)
                 {
-                    Debug.Log("+20 Points");
-                    GameObject.Find("OrderManager").GetComponent<OrderManager>().SpawnNewOrder(this.transform.position);
+                    orderManager.AddPoints(20);
+                    orderManager.SpawnNewOrder(this.transform.position);
                     Destroy(this.gameObject);
                 }
             }
             else
             {
-                Debug.Log("-10 Points");
+                orderManager.SubtractPoints(10);
             }
         }
     }

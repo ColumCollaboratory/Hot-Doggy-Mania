@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class OrderManager : MonoBehaviour
@@ -16,8 +17,13 @@ public class OrderManager : MonoBehaviour
     [SerializeField]
     [Tooltip("The locations where Orders will spawn. NEEDS AN AMOUNT EQUAL TO ORDERS ON SCREEN")]
     private List<Transform> orderSpawnLocations;
+    [SerializeField]
+    private Text scoreText;
+    [SerializeField]
+    private Text ordersRemainingText;
 
-    private float ordersCompleted;
+    private int ordersCompleted;
+    private int score;
 
     //The orders currently in play
     private List<GameObject> currentOrders;
@@ -26,6 +32,9 @@ public class OrderManager : MonoBehaviour
     void Start()
     {
         ordersCompleted = 0;
+        score = 0;
+        scoreText.text = score.ToString();
+        ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //If manually putting in starting prefabs, comment this out
         /*for(int x=0;x<ordersOnScreen;x++)
         {
@@ -40,8 +49,12 @@ public class OrderManager : MonoBehaviour
     public void SpawnNewOrder(Vector3 orderLocation)
     {
         ordersCompleted++;
+        ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //Won't spawn a new order if completing all the ones on screen is enough to finish the level
-        if(ordersNeeded>ordersCompleted+ordersOnScreen)
+        Debug.Log("Orders Needed: " + ordersNeeded);
+        Debug.Log("Orders completed: " + ordersCompleted);
+        Debug.Log("Orders On Screen: " + ordersOnScreen);
+        if (ordersNeeded>=ordersCompleted+ordersOnScreen)
         {
             StartCoroutine(WaitToSpawn(orderLocation));
         }
@@ -53,9 +66,16 @@ public class OrderManager : MonoBehaviour
         int randomPrefab = Random.Range(0, orderPrefabs.Count);
         Instantiate(orderPrefabs[randomPrefab], orderLocation, new Quaternion());
     }
-    // Update is called once per frame
-    void Update()
+    
+    public void AddPoints(int points)
     {
-        
+        score += points;
+        scoreText.text = score.ToString();
+    }
+
+    public void SubtractPoints(int points)
+    {
+        score -= points;
+        scoreText.text = score.ToString();
     }
 }
