@@ -13,7 +13,7 @@ public class Ingredients : MonoBehaviour
     [SerializeField]
     private float fallingSpeed = 1;
 
-    private float conveyerSpeed = 3;
+    private float conveyerSpeed = 2;
     private Vector2 nextPosition;
     private bool isFalling = false;
     private bool canFall = false;

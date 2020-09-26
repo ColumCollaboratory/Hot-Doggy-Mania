@@ -44,3 +44,6 @@ TagManager:
   - name: Player
     uniqueID: 2577745113
     locked: 0
+  - name: Ingredients
+    uniqueID: 2134656583
+    locked: 0

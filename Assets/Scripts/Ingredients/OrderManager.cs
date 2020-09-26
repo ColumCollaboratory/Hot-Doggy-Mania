@@ -17,12 +17,15 @@ public class OrderManager : MonoBehaviour
     [Tooltip("The locations where Orders will spawn. NEEDS AN AMOUNT EQUAL TO ORDERS ON SCREEN")]
     private List<Transform> orderSpawnLocations;
 
+    private float ordersCompleted;
+
     //The orders currently in play
     private List<GameObject> currentOrders;
 
     // Start is called before the first frame update
     void Start()
     {
+        ordersCompleted = 0;
         //If manually putting in starting prefabs, comment this out
         /*for(int x=0;x<ordersOnScreen;x++)
         {
@@ -36,7 +39,12 @@ public class OrderManager : MonoBehaviour
 
     public void SpawnNewOrder(Vector3 orderLocation)
     {
-        StartCoroutine(WaitToSpawn(orderLocation));
+        ordersCompleted++;
+        //Won't spawn a new order if completing all the ones on screen is enough to finish the level
+        if(ordersNeeded>ordersCompleted+ordersOnScreen)
+        {
+            StartCoroutine(WaitToSpawn(orderLocation));
+        }
     }
 
     IEnumerator WaitToSpawn(Vector2 orderLocation)
