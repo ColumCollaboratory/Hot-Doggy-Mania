@@ -34,20 +34,19 @@ public class Ingredients : MonoBehaviour
     {
         if(isFalling==true)
         {
-            Fall();
+            FallingMovement();
         }
         else
         {
             MoveOnConveyer();
             if(canFall == true && Input.GetKeyDown(KeyCode.E))
             {
-                nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
-                isFalling = true;
+                Fall();
             }
         }
     }
 
-    private void Fall()
+    private void FallingMovement()
     {
         if (this.transform.position.y >= nextPosition.y)
         {
@@ -106,5 +105,11 @@ public class Ingredients : MonoBehaviour
         {
             canFall = false;
         }
+    }
+
+    public void Fall()
+    {
+        isFalling = true;
+        nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
     }
 }
