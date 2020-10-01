@@ -49,6 +49,10 @@ public class OrderManager : MonoBehaviour
     public void SpawnNewOrder(Vector3 orderLocation)
     {
         ordersCompleted++;
+        if(ordersCompleted>=ordersNeeded)
+        {
+            Application.Quit();
+        }
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //Won't spawn a new order if completing all the ones on screen is enough to finish the level
         Debug.Log("Orders Needed: " + ordersNeeded);

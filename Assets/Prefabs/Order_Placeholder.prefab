@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6097743586157523582}
   - component: {fileID: 6097743586157523581}
   m_Layer: 0
-  m_Name: Order_CheeseKetchup
+  m_Name: Order_Placeholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44c18472cb12ce4d91b8330d26190b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientsNeeded: []
+  ingredientsNeeded:
+  - cheese
+  - cheese
+  - 
+  - 
 --- !u!61 &6097743586157523582
 BoxCollider2D:
   m_ObjectHideFlags: 0
