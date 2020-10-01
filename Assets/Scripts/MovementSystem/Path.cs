@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
-/// Identifies the type of path in a pathing network.
+/// Represents an axis in 2D.
 /// </summary>
-public enum PathType : byte
+public enum Axis : byte
 {
-    Floor, Climbable
+    Horizontal, Vertical
 }
 
 /// <summary>
@@ -14,32 +15,39 @@ public enum PathType : byte
 public sealed class Path
 {
     /// <summary>
-    /// The type of path this is.
-    /// </summary>
-    public readonly PathType pathType;
-    /// <summary>
     /// The start of the path.
     /// </summary>
     public readonly Vector2 start;
     /// <summary>
-    /// The length of the path in meters.
+    /// The end of the path.
+    /// </summary>
+    public readonly Vector2 end;
+    /// <summary>
+    /// The length of the path.
     /// </summary>
     public readonly float length;
     /// <summary>
+    /// The direction of this path.
+    /// </summary>
+    public readonly Axis axis;
+    /// <summary>
     /// The junctions along the path with other paths.
     /// </summary>
-    public Junction[] junctions;
+    public List<Junction> junctions;
     /// <summary>
-    /// Creates a path with the given properties.
+    /// Creates a new path with the given data.
     /// </summary>
-    /// <param name="pathType">The type of path this is.</param>
-    /// <param name="start">The start of the path.</param>
-    /// <param name="length">The length of the path in meters.</param>
-    public Path(PathType pathType, Vector2 start, float length)
+    /// <param name="start">The startpoint of the path.</param>
+    /// <param name="end">The endpoint of the path.</param>
+    public Path(Vector2 start, Vector2 end)
     {
-        this.pathType = pathType;
         this.start = start;
-        this.length = length;
-        junctions = new Junction[0];
+        this.end = end;
+        this.length = Vector2.Distance(start, end);
+        if (Mathf.Abs((end - start).x) > Mathf.Abs((end - start).y))
+            axis = Axis.Horizontal;
+        else
+            axis = Axis.Vertical;
+        junctions = new List<Junction>();
     }
 }

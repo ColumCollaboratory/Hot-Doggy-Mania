@@ -1,30 +1,43 @@
-﻿/// <summary>
+﻿using UnityEngine;
+
+/// <summary>
 /// Defines a junction from one path to another (one directional).
 /// </summary>
 public sealed class Junction
 {
     /// <summary>
-    /// The path that joins at this junction.
+    /// The first path of this junction.
     /// </summary>
-    public readonly Path joiningPath;
+    public readonly Path pathA;
+    /// <summary>
+    /// The second path of this junction.
+    /// </summary>
+    public readonly Path pathB;
     /// <summary>
     /// The distance along the base path to reach this junction.
     /// </summary>
-    public readonly float distAlongBase;
+    public readonly float distanceA;
     /// <summary>
     /// The distance along the joining path to reach this junction.
     /// </summary>
-    public readonly float distAlongJoining;
+    public readonly float distanceB;
     /// <summary>
-    /// Creates a readonly junction with the given properties.
+    /// The intersection location of this junction.
     /// </summary>
-    /// <param name="joiningPath">The path that joins at this junction.</param>
-    /// <param name="distAlongBase">The distance along the base path to reach this junction.</param>
-    /// <param name="distAlongJoining">The distance along the joining path to reach this junction.</param>
-    public Junction(Path joiningPath, float distAlongBase, float distAlongJoining)
+    public readonly Vector2 intersection;
+    /// <summary>
+    /// Creates a new junction between paths.
+    /// </summary>
+    /// <param name="pathA">The first path of this junction.</param>
+    /// <param name="pathB">The second path of this junction.</param>
+    /// <param name="distanceA">The distance along the base path to reach this junction.</param>
+    /// <param name="distanceB">The distance along the joining path to reach this junction.</param>
+    public Junction(Path pathA, Path pathB, float distanceA, float distanceB)
     {
-        this.joiningPath = joiningPath;
-        this.distAlongBase = distAlongBase;
-        this.distAlongJoining = distAlongJoining;
+        this.pathA = pathA;
+        this.pathB = pathB;
+        this.distanceA = distanceA;
+        this.distanceB = distanceB;
+        intersection = pathA.start + (pathA.end - pathA.start).normalized * distanceA;
     }
 }

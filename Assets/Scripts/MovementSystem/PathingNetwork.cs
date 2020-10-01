@@ -1,37 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using HotDoggyMania.MovementSystemDesigner;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Represents a network of connected paths that an actor can traverse.
 /// </summary>
 public sealed class PathingNetwork : MonoBehaviour
 {
+    #region Exposed Accessors
     /// <summary>
-    /// Fired every time the path network is recalculated.
+    /// The paths in this network.
     /// </summary>
-    public event Command OnPathsChanged;
-
-    // This is assigned here to avoid null reference
-    // exceptions from the designer script.
-    private Path[] paths = new Path[0];
-
-    private void Start()
-    {
-        PreCalculate();
-        DestroyEditorComponents();
-    }
-
+    public Path[] Paths { get; private set; }
     /// <summary>
-    /// Returns a copy of the paths in this network.
+    /// The junctions in this network.
     /// </summary>
-    public Path[] Paths { get { return (Path[])paths.Clone(); } }
-
-
-
-
-
+    public Junction[] Junctions { get; private set; }
     /// <summary>
     /// Returns a collection of vectors at every intersection location.
     /// </summary>
@@ -40,17 +24,24 @@ public sealed class PathingNetwork : MonoBehaviour
         get
         {
             List<Vector2> intersections = new List<Vector2>();
-            foreach (Path path in paths)
-                // We can skip all climbable junctions because
-                // they will always have a floor junction counterpart.
-                if (path.pathType == PathType.Floor)
-                    foreach (Junction junction in path.junctions)
-                        intersections.Add(path.start + junction.distAlongBase * Vector2.right);
+            foreach (Junction junction in Junctions)
+                intersections.Add(junction.intersection);
             return intersections.ToArray();
         }
     }
-
-    // Removes scene instances that are not neccasary during runtime.
+    #endregion
+    #region Exposed Events
+    /// <summary>
+    /// Fired every time the path network is recalculated.
+    /// </summary>
+    public event Command OnNetworkChanged;
+    #endregion
+    #region MonoBehaviour Implementation
+    private void Start()
+    {
+        PreCalculate();
+        DestroyEditorComponents();
+    }
     private void DestroyEditorComponents()
     {
         // Retrieve nodes from the scene.
@@ -62,7 +53,8 @@ public sealed class PathingNetwork : MonoBehaviour
         foreach (ClimbableNode cNode in cNodes)
             Destroy(cNode.gameObject);
     }
-
+    #endregion
+    #region Scene Processing
     /// <summary>
     /// Processes the designer components into the network data structure.
     /// </summary>
@@ -75,65 +67,45 @@ public sealed class PathingNetwork : MonoBehaviour
         // Convert the nodes into a smaller data structure.
         List<Path> floorPaths = new List<Path>();
         foreach (FloorNode fNode in fNodes)
-            floorPaths.Add(new Path(PathType.Floor, fNode.transform.position, fNode.Length));
+            floorPaths.Add(new Path(fNode.transform.position,
+                (Vector2)fNode.transform.position + Vector2.right * fNode.Length));
         List<Path> climbablePaths = new List<Path>();
         foreach (ClimbableNode cNode in cNodes)
-            climbablePaths.Add(new Path(PathType.Climbable, cNode.transform.position, cNode.Length));
+            climbablePaths.Add(new Path(cNode.transform.position,
+                (Vector2)cNode.transform.position + Vector2.up * cNode.Length));
+        // Create a list to keep track of all of the junctions.
+        List<Junction> junctionsAccumulator = new List<Junction>();
 
         // For each floor node-path from the scene:
         foreach (Path fPath in floorPaths)
         {
-            // Start searching for junctions.
-            List<Junction> junctions = new List<Junction>();
-
             // Check for connections with climbable node-paths:
             foreach (Path cPath in climbablePaths)
             {
                 // Is there an x intersection?
-                float distanceAlongX = cPath.start.x - fPath.start.x;
-                if (distanceAlongX >= 0 && distanceAlongX <= fPath.length)
+                if (cPath.start.x >= fPath.start.x && cPath.start.x <= fPath.end.x)
                 {
                     // Is there a y intersection?
-                    float distanceAlongY = fPath.start.y - cPath.start.y;
-                    if (distanceAlongY >= 0 && distanceAlongY <= cPath.length)
+                    if (fPath.start.y >= cPath.start.y && fPath.start.y <= cPath.end.y)
                     {
-                        junctions.Add(new Junction(cPath, distanceAlongX, distanceAlongY));
+                        // Add the junction to both paths.
+                        Junction junction = new Junction(fPath, cPath, cPath.start.x - fPath.start.x,
+                            fPath.start.y - cPath.start.y);
+                        fPath.junctions.Add(junction);
+                        cPath.junctions.Add(junction);
+                        junctionsAccumulator.Add(junction);
                     }
                 }
             }
-            // Convert the junctions to an array and post them to the path.
-            fPath.junctions = junctions.ToArray();
         }
 
-        // For each climbable node-path from the scene:
-        foreach (Path cPath in climbablePaths)
-        {
-            // Start searching for junctions.
-            List<Junction> junctions = new List<Junction>();
-
-            // Check for connections with climbable node-paths:
-            foreach (Path fPath in floorPaths)
-            {
-                // Is there a y intersection?
-                float distanceAlongY = fPath.start.y - cPath.start.y;
-                if (distanceAlongY >= 0 && distanceAlongY <= cPath.length)
-                {
-                    // Is there an x intersection?
-                    float distanceAlongX = cPath.start.x - fPath.start.x;
-                    if (distanceAlongX >= 0 && distanceAlongX <= fPath.length)
-                    {
-                        junctions.Add(new Junction(fPath, distanceAlongY, distanceAlongX));
-                    }
-                }
-            }
-            // Convert the junctions to an array and post them to the path.
-            cPath.junctions = junctions.ToArray();
-        }
-
-        // Combine the generated paths.
+        // Combine and post paths and junctions.
         floorPaths.AddRange(climbablePaths);
-        paths = floorPaths.ToArray();
+        Paths = floorPaths.ToArray();
+        Junctions = junctionsAccumulator.ToArray();
+
         // Notify anyone that is listening for path changes.
-        OnPathsChanged?.Invoke();
+        OnNetworkChanged?.Invoke();
     }
+    #endregion
 }
