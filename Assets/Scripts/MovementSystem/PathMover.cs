@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -48,7 +49,7 @@ public abstract class PathMover : MonoBehaviour
                 if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                 {
                     CurrentDistance = Mathf.Clamp(CurrentDistance + direction.x, 0, CurrentPath.length);
-                    ApplyTransform();
+                    transform.position = GetLocation();
                 }
                 // Looking to switch junctions.
                 else
@@ -72,20 +73,20 @@ public abstract class PathMover : MonoBehaviour
                                 // Switch to the new path.
                                 CurrentPath = joiningPath;
                                 CurrentDistance = newDistanceAlong;
-                                ApplyTransform();
+                                transform.position = GetLocation();
                                 return;
                             }
                         }
                     }
                     CurrentDistance = Mathf.Clamp(CurrentDistance + direction.x, 0, CurrentPath.length);
-                    ApplyTransform();
+                    transform.position = GetLocation();
                 }
                 break;
             case Axis.Vertical:
                 if (Mathf.Abs(direction.y) > Mathf.Abs(direction.x))
                 {
                     CurrentDistance = Mathf.Clamp(CurrentDistance + direction.y, 0, CurrentPath.length);
-                    ApplyTransform();
+                    transform.position = GetLocation();
                 }
                 else
                 {
@@ -101,27 +102,27 @@ public abstract class PathMover : MonoBehaviour
                             {
                                 CurrentPath = joiningPath;
                                 CurrentDistance = newDistanceAlong;
-                                ApplyTransform();
+                                transform.position = GetLocation();
                                 return;
                             }
                         }
                     }
                     CurrentDistance = Mathf.Clamp(CurrentDistance + direction.y, 0, CurrentPath.length);
-                    ApplyTransform();
+                    transform.position = GetLocation();
                 }
                 break;
         }
     }
-    private void ApplyTransform()
+    private Vector2 GetLocation()
     {
         switch (CurrentPath.axis)
         {
             case Axis.Horizontal:
-                transform.position = CurrentPath.start + CurrentDistance * Vector2.right;
-                break;
+                return CurrentPath.start + CurrentDistance * Vector2.right;
             case Axis.Vertical:
-                transform.position = CurrentPath.start + CurrentDistance * Vector2.up;
-                break;
+                return CurrentPath.start + CurrentDistance * Vector2.up;
+            default:
+                throw new NotImplementedException();
         }
     }
     #endregion
@@ -131,120 +132,148 @@ public abstract class PathMover : MonoBehaviour
     /// </summary>
     /// <param name="target">The target path mover.</param>
     /// <returns>An array of coordinates for the route.</returns>
-    protected Vector2[] FindRoute(PathMover target)
+    protected List<Vector2> FindRoute(PathMover target)
     {
-        return PerfectRouteFind(target.CurrentPath, target.CurrentDistance);
+        return AStarPathFind(target.CurrentPath, target.CurrentDistance);
     }
     /// <summary>
     /// Finds the route to the closest point to a given location.
     /// </summary>
     /// <param name="target">The target location to travel to.</param>
     /// <returns>An array of coordinates for the route.</returns>
-    protected Vector2[] FindRoute(Vector2 target)
+    protected List<Vector2> FindRoute(Vector2 target)
     {
         FindSnap(target, out Path nearPath, out float nearDistance);
-        return PerfectRouteFind(nearPath, nearDistance);
+        return AStarPathFind(nearPath, nearDistance);
     }
-    private Vector2[] PerfectRouteFind(Path targetPath, float distanceOnTarget)
+    private List<Vector2> AStarPathFind(Path targetPath, float distanceOnTarget)
     {
-        // TODO figure out a way to remove this null check.
-        // Has to do with script execution order.
-        if (targetPath == null) { return new Vector2[0]; }
+        AStarGraph graph = pathingNetwork.NodeGraph;
 
-        // Get the final point of the route.
-        Vector2 destination;
+        AStarNode start = new AStarNode(GetLocation());
+        for (int i = 0; i < CurrentPath.junctions.Count; i++)
+        {
+            Junction junction = CurrentPath.junctions[i];
+            float distance = (junction.pathA == CurrentPath) ? junction.distanceA : junction.distanceB;
+            if (distance == CurrentDistance)
+            {
+                start = graph.nodes[pathingNetwork.graphIndices[junction]];
+                break;
+            }
+            else if (distance > CurrentDistance)
+            {
+                if (i == 0)
+                    graph.AddNode(start, pathingNetwork.graphIndices[junction]);
+                else
+                    graph.SubdivideLink(pathingNetwork.graphIndices[CurrentPath.junctions[i - 1]], pathingNetwork.graphIndices[junction], start);
+                break;
+            }
+            else if (i == CurrentPath.junctions.Count - 1)
+                graph.AddNode(start, pathingNetwork.graphIndices[junction]);
+        }
+
+        Vector2 endLocation = Vector2.zero;
         switch (targetPath.axis)
         {
             case Axis.Horizontal:
-                destination = targetPath.start + targetPath.length * Vector2.right * distanceOnTarget;
+                endLocation = targetPath.start + distanceOnTarget * Vector2.right;
                 break;
             case Axis.Vertical:
-                destination = targetPath.start + targetPath.length * Vector2.up * distanceOnTarget;
+                endLocation = targetPath.start + distanceOnTarget * Vector2.up;
                 break;
-            default:
-                throw new NotImplementedException();
+        }
+        AStarNode end = new AStarNode(endLocation);
+        for (int i = 0; i < targetPath.junctions.Count; i++)
+        {
+            Junction junction = targetPath.junctions[i];
+            float distance = (junction.pathA == targetPath) ? junction.distanceA : junction.distanceB;
+            if (distance == CurrentDistance)
+            {
+                end = graph.nodes[pathingNetwork.graphIndices[junction]];
+                break;
+            }
+            else if (distance > CurrentDistance)
+            {
+                if (i == 0)
+                    graph.AddNode(end, pathingNetwork.graphIndices[junction]);
+                else
+                    graph.SubdivideLink(pathingNetwork.graphIndices[targetPath.junctions[i - 1]], pathingNetwork.graphIndices[junction], end);
+                break;
+            }
+            else if (i == targetPath.junctions.Count - 1)
+                graph.AddNode(end, pathingNetwork.graphIndices[junction]);
         }
 
-        // Track the minimum distance to get to each junction.
-        // This circuit-breaks infinite looping scenarios.
-        Dictionary<Junction, float> minDistanceToJunction = new Dictionary<Junction, float>();
-        foreach (Junction junction in pathingNetwork.Junctions)
-            minDistanceToJunction.Add(junction, float.MaxValue);
-        // Track the currently used route.
-        Stack<Junction> usedJunctions = new Stack<Junction>();
-        Stack<Vector2> currentRoute = new Stack<Vector2>();
-        float currentDistance = 0f;
-
-        // Keep track of the best solution found so far.
-        Vector2[] solution = new Vector2[0];
-        float solutionDistance = float.MaxValue;
-
-        // Start recursive algorithm.
-        // This algorithm starts at the destination and searches
-        // for the starting point. This ensures the stack does
-        // not need to be reversed.
-        currentRoute.Push(destination);
-        Traverse(targetPath, distanceOnTarget);
-        void Traverse(Path path, float location)
+        List<AStarNode> openNodes = new List<AStarNode>();
+        List<AStarNode> closedNodes = new List<AStarNode>();
+        closedNodes.Add(start);
+        start.h = Vector2.Distance(start.location, end.location);
+        start.g = 0;
+        start.f = start.h + start.g;
+        AStarNode current = start;
+        do
         {
-            if (path == CurrentPath)
+            foreach (AStarNode linked in current.linkedNodes)
             {
-                // Calculate the total distance and see if
-                // it is better than our previous solution.
-                float totalDistance = currentDistance + Mathf.Abs(CurrentDistance - location);
-                if (totalDistance < solutionDistance)
+                if (!closedNodes.Contains(linked) && !openNodes.Contains(linked))
                 {
-                    solution = currentRoute.ToArray();
-                    solutionDistance = totalDistance;
-                }
-            }
-            else
-            {
-                // Look at the available junctions.
-                foreach (Junction junction in path.junctions)
-                {
-                    // Explore this junction if it leads to an unexplored path.
-                    if (!usedJunctions.Contains(junction))
+                    if (linked == end)
                     {
-                        // TODO this if else is a bit messy, but 
-                        // requires a lot of thought to remove.
-                        if (junction.pathA == path)
+                        List<Vector2> path = new List<Vector2>();
+                        path.Add(end.location);
+                        while (current.previous != null)
                         {
-                            float addedDistance = Mathf.Abs(location - junction.distanceA);
-                            // Will this path allow us to reach the next junction faster than before?
-                            if (currentDistance + addedDistance < minDistanceToJunction[junction])
-                            {
-                                // Push traversal state.
-                                currentDistance += addedDistance;
-                                currentRoute.Push(junction.intersection);
-                                usedJunctions.Push(junction);
-                                // Traverse down this network.
-                                Traverse(junction.pathB, junction.distanceB);
-                                // Pop traversal state.
-                                currentRoute.Pop();
-                                usedJunctions.Pop();
-                                currentDistance -= addedDistance;
-                            }
+                            path.Add(current.previous.location);
+                            current = current.previous;
                         }
-                        else
-                        {
-                            float addedDistance = Mathf.Abs(location - junction.distanceB);
-                            if (currentDistance + addedDistance < minDistanceToJunction[junction])
-                            {
-                                currentDistance += addedDistance;
-                                currentRoute.Push(junction.intersection);
-                                usedJunctions.Push(junction);
-                                Traverse(junction.pathA, junction.distanceA);
-                                currentRoute.Pop();
-                                usedJunctions.Pop();
-                                currentDistance -= addedDistance;
-                            }
-                        }
+                        path.Reverse();
+                        return path;
+                    }
+                    else
+                    {
+                        openNodes.Add(linked);
+                        linked.previous = current;
+                        linked.h = Vector2.Distance(linked.location, end.location);
+                        linked.g = current.linkLengths[linked] + current.g;
+                        linked.f = linked.g + linked.h;
                     }
                 }
             }
+            AStarNode bestNode = null;
+            float bestF = float.MaxValue;
+            foreach (AStarNode node in openNodes)
+            {
+                if (current.linkedNodes.Contains(current))
+                {
+                    float newG = current.linkLengths[node] + current.g;
+                    if (newG < node.g)
+                    {
+                        node.previous = current;
+                        node.g = newG;
+                        node.f = node.g + node.h;
+                    }
+                }
+                if (node.f < bestF)
+                {
+                    bestNode = node;
+                    bestF = node.f;
+                }
+            }
+            openNodes.Remove(current);
+            closedNodes.Add(current);
+            current = bestNode;
         }
-        return solution;
+        while (openNodes.Count > 0);
+        foreach (AStarNode node in graph.nodes)
+        {
+            Debug.DrawRay(node.location, Vector2.up + Vector2.right, Color.red, 100);
+            foreach (AStarNode linkedNode in node.linkedNodes)
+            {
+                Debug.DrawLine(node.location, (Vector3)linkedNode.location + Vector3.back, Color.blue, 100);
+            }
+        }
+        Debug.Break();
+        throw new Exception("could not route");
     }
     #endregion
     #region Snap Finding Methods
@@ -259,7 +288,7 @@ public abstract class PathMover : MonoBehaviour
         FindSnap(location, out Path nearPath, out float nearDistance);
         CurrentPath = nearPath;
         CurrentDistance = nearDistance;
-        ApplyTransform();
+        GetLocation();
     }
     private void FindSnap(Vector2 location, out Path nearPath, out float pathDistance)
     {

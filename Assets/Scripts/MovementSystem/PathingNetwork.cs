@@ -7,7 +7,11 @@ using HotDoggyMania.MovementSystemDesigner;
 /// </summary>
 public sealed class PathingNetwork : MonoBehaviour
 {
+    private AStarGraph nodeGraph;
+
     #region Exposed Accessors
+    public Dictionary<Junction, int> graphIndices;
+    public AStarGraph NodeGraph { get { return nodeGraph.Clone(); } }
     /// <summary>
     /// The paths in this network.
     /// </summary>
@@ -99,10 +103,43 @@ public sealed class PathingNetwork : MonoBehaviour
             }
         }
 
+        graphIndices = new Dictionary<Junction, int>();
+        nodeGraph = new AStarGraph();
+        int insertionIndex = 0;
+        foreach (Path path in floorPaths)
+        {
+            path.junctions.Sort();
+            for (int i = 0; i < path.junctions.Count; i++)
+            {
+                nodeGraph.AddNode(new AStarNode(path.junctions[i].intersection));
+                graphIndices.Add(path.junctions[i], insertionIndex);
+                insertionIndex++;
+            }
+            for (int i = 0; i < path.junctions.Count - 1; i++)
+            {
+                AStarNode before = nodeGraph.nodes[graphIndices[path.junctions[i]]];
+                AStarNode after = nodeGraph.nodes[graphIndices[path.junctions[i + 1]]];
+                before.AddLink(after);
+                after.AddLink(before);
+            }
+        }
+        foreach (Path path in climbablePaths)
+        {
+            path.junctions.Sort();
+            for (int i = 0; i < path.junctions.Count - 1; i++)
+            {
+                AStarNode before = nodeGraph.nodes[graphIndices[path.junctions[i]]];
+                AStarNode after = nodeGraph.nodes[graphIndices[path.junctions[i + 1]]];
+                before.AddLink(after);
+                after.AddLink(before);
+            }
+        }
+
         // Combine and post paths and junctions.
         floorPaths.AddRange(climbablePaths);
         Paths = floorPaths.ToArray();
         Junctions = junctionsAccumulator.ToArray();
+        
 
         // Notify anyone that is listening for path changes.
         OnNetworkChanged?.Invoke();

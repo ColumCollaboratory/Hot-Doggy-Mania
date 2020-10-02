@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Defines a junction from one path to another (one directional).
 /// </summary>
-public sealed class Junction
+public sealed class Junction : IComparable<Junction>
 {
     /// <summary>
     /// The first path of this junction.
@@ -39,5 +40,12 @@ public sealed class Junction
         this.distanceA = distanceA;
         this.distanceB = distanceB;
         intersection = pathA.start + (pathA.end - pathA.start).normalized * distanceA;
+    }
+
+    public int CompareTo(Junction other)
+    {
+        Vector2 difference = other.intersection - intersection;
+        float largerComponent = (Mathf.Abs(difference.x) > Mathf.Abs(difference.y)) ? difference.x : difference.y;
+        return (largerComponent < 0) ? 1 : -1;
     }
 }
