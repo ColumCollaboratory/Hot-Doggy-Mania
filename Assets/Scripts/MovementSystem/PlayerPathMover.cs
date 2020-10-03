@@ -30,6 +30,11 @@ public sealed class PlayerPathMover : PathMover
             travel.y = climbSpeed * Input.GetAxis("Vertical") * Time.deltaTime;
             Move(travel);
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
     #endregion
+    
 }

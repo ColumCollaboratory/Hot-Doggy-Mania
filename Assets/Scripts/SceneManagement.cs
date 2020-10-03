@@ -14,7 +14,6 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
-        AudioSingleton.instance.PlayBGM("Menu_BGM");
     }
 
     public void LoadGameScene()
