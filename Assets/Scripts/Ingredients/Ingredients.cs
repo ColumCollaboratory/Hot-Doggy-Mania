@@ -13,6 +13,7 @@ public class Ingredients : MonoBehaviour
     [SerializeField]
     private float fallingSpeed = 1;
 
+    private GameObject storedPlayer;
     private float conveyerSpeed = 2;
     private Vector2 nextPosition;
     private bool isFalling = false;
@@ -95,6 +96,7 @@ public class Ingredients : MonoBehaviour
         if(collision.GetComponent<PlayerPathMover>())
         {
             Debug.Log("Collided With Player");
+            storedPlayer = collision.gameObject.transform.GetChild(0).gameObject;
             canFall = true;
         }
     }
@@ -109,6 +111,7 @@ public class Ingredients : MonoBehaviour
 
     public void Fall()
     {
+        storedPlayer.GetComponent<Animator>().SetTrigger("pushIngredient");
         isFalling = true;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
     }
