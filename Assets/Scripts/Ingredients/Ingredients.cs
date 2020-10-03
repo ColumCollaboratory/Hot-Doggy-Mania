@@ -92,10 +92,8 @@ public class Ingredients : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collided");
         if(collision.GetComponent<PlayerPathMover>())
         {
-            Debug.Log("Collided With Player");
             storedPlayer = collision.gameObject.transform.GetChild(0).gameObject;
             canFall = true;
         }
@@ -111,8 +109,16 @@ public class Ingredients : MonoBehaviour
 
     public void Fall()
     {
-        storedPlayer.GetComponent<Animator>().SetTrigger("pushIngredient");
+        if (storedPlayer != null)
+        {
+            storedPlayer.gameObject.GetComponent<Animator>().SetTrigger("pushIngredient");
+        }
         isFalling = true;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
+    }
+
+    public bool GetFalling()
+    {
+        return isFalling;
     }
 }
