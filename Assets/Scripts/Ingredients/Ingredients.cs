@@ -66,6 +66,7 @@ public class Ingredients : MonoBehaviour
         //If object is moving below map, then it 
         if(transform.position.y<-7)
         {
+            AudioSingleton.instance.PlaySFX("Garbage_1");
             Destroy(this.gameObject);
         }
         //MOVE LEFT
@@ -115,6 +116,7 @@ public class Ingredients : MonoBehaviour
         }
         isFalling = true;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
+        AudioSingleton.instance.PlaySFX("Drop_Ingredient_1");
     }
 
     public bool GetFalling()

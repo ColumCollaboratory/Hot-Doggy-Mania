@@ -17,7 +17,12 @@ public class IngredientSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnRandomIngredient();
+        //Sometimes double spawns for some reason
+        if(canSpawn==true)
+        {
+            StartCoroutine(SpawnInterval());
+            SpawnRandomIngredient();
+        }
     }
 
     // Update is called once per frame
