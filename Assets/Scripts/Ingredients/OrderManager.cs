@@ -53,7 +53,7 @@ public class OrderManager : MonoBehaviour
         if(ordersCompleted>=ordersNeeded)
         {
             AudioSingleton.instance.PlaySFX("Complete_Level");
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(0);
         }
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //Won't spawn a new order if completing all the ones on screen is enough to finish the level
