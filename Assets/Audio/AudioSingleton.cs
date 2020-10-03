@@ -15,14 +15,20 @@ public sealed class AudioSingleton : MonoBehaviour
 
     private void Start()
     {
-        instance = this;
-        if (audioClips.Length == clipNames.Length)
+        if (instance != null)
+            Destroy(gameObject);
+        else
         {
-            clips = new Dictionary<string, AudioClip>();
-            for (int i = 0; i < clipNames.Length; i++)
-                clips.Add(clipNames[i], audioClips[i]);
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+            if (audioClips.Length == clipNames.Length)
+            {
+                clips = new Dictionary<string, AudioClip>();
+                for (int i = 0; i < clipNames.Length; i++)
+                    clips.Add(clipNames[i], audioClips[i]);
+            }
+            bgmSource.loop = true;
         }
-        bgmSource.loop = true;
     }
 
     public void PlaySFX(string clipName)
