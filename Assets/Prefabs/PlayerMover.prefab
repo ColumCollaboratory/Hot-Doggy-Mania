@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 133168840753246522}
   - component: {fileID: 133168840753246517}
   - component: {fileID: 483506748907755596}
+  - component: {fileID: 3053200775351724863}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -141,7 +142,7 @@ Animator:
   m_GameObject: {fileID: 133168840753246516}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 496564dc3d1d0574b9c8c0b10a2ccda3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 77207987ec6249b44998ac520093a412, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -150,3 +151,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3053200775351724863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133168840753246516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bbfb6c3e6dab04492cd3be9edc8a0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 133168840753246517}
+  animator: {fileID: 483506748907755596}
+  pathMover: {fileID: 133168839755159606}
+  idleTolerance: 0.001
