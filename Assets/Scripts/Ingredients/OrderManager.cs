@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class OrderManager : MonoBehaviour
@@ -51,7 +52,7 @@ public class OrderManager : MonoBehaviour
         ordersCompleted++;
         if(ordersCompleted>=ordersNeeded)
         {
-            Application.Quit();
+            SceneManager.LoadScene(2);
         }
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //Won't spawn a new order if completing all the ones on screen is enough to finish the level
