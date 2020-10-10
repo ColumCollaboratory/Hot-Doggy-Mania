@@ -14,10 +14,13 @@ public class MoverAnimatorMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pathMover.CurrentPath.axis == Axis.Horizontal)
-            animator.SetBool("On Floor", true);
-        else
-            animator.SetBool("On Floor", false);
+        if (pathMover.CurrentPath != null)
+        {
+            if (pathMover.CurrentPath.axis == Axis.Horizontal)
+                animator.SetBool("On Floor", true);
+            else
+                animator.SetBool("On Floor", false);
+        }
 
         if ((lastLocation - (Vector2)transform.position).magnitude < idleTolerance)
             animator.SetBool("Is Moving", false);

@@ -14,6 +14,7 @@ public class SceneManagement : MonoBehaviour
 
     private void Start()
     {
+
     }
 
     public void LoadGameScene()

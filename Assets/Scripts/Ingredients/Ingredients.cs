@@ -40,10 +40,6 @@ public class Ingredients : MonoBehaviour
         else
         {
             MoveOnConveyer();
-            if(canFall == true && Input.GetKeyDown(KeyCode.E))
-            {
-                Fall();
-            }
         }
     }
 
@@ -116,7 +112,7 @@ public class Ingredients : MonoBehaviour
         }
         isFalling = true;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
-        AudioSingleton.instance.PlaySFX("Drop_Ingredient_1");
+        AudioSingleton.instance?.PlaySFX("Drop_Ingredient_1");
     }
 
     public bool GetFalling()
