@@ -28,8 +28,8 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerPathMover>()!=null&&canKill==true)
         {
             Debug.Log("Collided With Player");
-            AudioSingleton.instance.PlaySFX("Lose_Life");
-            AudioSingleton.instance.PlayBGM("Menu_BGM");
+            AudioSingleton.instance?.PlaySFX("Lose_Life");
+            AudioSingleton.instance?.PlayBGM("Menu_BGM");
             SceneManager.LoadScene(0);
         }
         if(collision.GetComponent<Ingredients>())
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     {
         this.transform.Rotate(new Vector3(0, 0, 90));
         gameObject.GetComponentInParent<AIPathMover>().enabled = false;
-        AudioSingleton.instance.PlaySFX("Spray_Enemy");
+        AudioSingleton.instance?.PlaySFX("Spray_Enemy");
         canDie = false;
         canKill = false;
         yield return new WaitForSeconds(downTimer);

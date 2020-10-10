@@ -45,7 +45,7 @@ public class Orders : MonoBehaviour
                 if (ingredientsNeeded.Count == 0)
                 {
                     orderManager.AddPoints(20);
-                    AudioSingleton.instance.PlaySFX("Complete_Order");
+                    AudioSingleton.instance?.PlaySFX("Complete_Order");
                     orderManager.SpawnNewOrder(this.transform.position);
                     Destroy(this.gameObject);
                 }
@@ -53,7 +53,7 @@ public class Orders : MonoBehaviour
             else
             {
                 orderManager.SubtractPoints(10);
-                AudioSingleton.instance.PlaySFX("Wrong_Ingredient");
+                AudioSingleton.instance?.PlaySFX("Wrong_Ingredient");
             }
         }
     }

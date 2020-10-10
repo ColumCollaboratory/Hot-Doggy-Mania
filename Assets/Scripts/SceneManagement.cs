@@ -20,19 +20,19 @@ public class SceneManagement : MonoBehaviour
     public void LoadGameScene()
     {
         SceneManager.LoadScene(gameSceneName);
-        AudioSingleton.instance.PlayBGM("Gameplay_BGM");
+        AudioSingleton.instance?.PlayBGM("Gameplay_BGM");
     }
 
     public void ShowTitle()
     {
         titleMenuPanel.SetActive(true);
-        AudioSingleton.instance.PlaySFX("Credits_Close");
+        AudioSingleton.instance?.PlaySFX("Credits_Close");
         creditsMenuPanel.SetActive(false);
     }
 
     public void ShowCredits()
     {
-        AudioSingleton.instance.PlaySFX("Credits_Open");
+        AudioSingleton.instance?.PlaySFX("Credits_Open");
         creditsMenuPanel.SetActive(true);
         titleMenuPanel.SetActive(false);
     }

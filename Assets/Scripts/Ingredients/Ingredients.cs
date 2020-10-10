@@ -62,7 +62,7 @@ public class Ingredients : MonoBehaviour
         //If object is moving below map, then it 
         if(transform.position.y<-7)
         {
-            AudioSingleton.instance.PlaySFX("Garbage_1");
+            AudioSingleton.instance?.PlaySFX("Garbage_1");
             Destroy(this.gameObject);
         }
         //MOVE LEFT
