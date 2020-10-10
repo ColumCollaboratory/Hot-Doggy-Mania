@@ -7,11 +7,12 @@ using HotDoggyMania.MovementSystemDesigner;
 /// </summary>
 public sealed class PathingNetwork : MonoBehaviour
 {
-    private AStarGraph nodeGraph;
-
-    #region Exposed Accessors
+    #region Fields
+    private NodeGraph nodeGraph;
+    #endregion
+    #region Properties
     public Dictionary<Junction, int> graphIndices;
-    public AStarGraph NodeGraph { get { return nodeGraph.Clone(); } }
+    public NodeGraph NodeGraph { get { return nodeGraph.Clone(); } }
     /// <summary>
     /// The paths in this network.
     /// </summary>
@@ -34,17 +35,19 @@ public sealed class PathingNetwork : MonoBehaviour
         }
     }
     #endregion
-    #region Exposed Events
+    #region Events
     /// <summary>
     /// Fired every time the path network is recalculated.
     /// </summary>
     public event Command OnNetworkChanged;
     #endregion
-    #region MonoBehaviour Implementation
+    #region MonoBehaviour Methods
     private void Start()
     {
         PreCalculate();
         DestroyEditorComponents();
+        foreach (PathMover mover in FindObjectsOfType<PathMover>())
+            mover.Activate();
     }
     private void DestroyEditorComponents()
     {
@@ -58,7 +61,7 @@ public sealed class PathingNetwork : MonoBehaviour
             Destroy(cNode.gameObject);
     }
     #endregion
-    #region Scene Processing
+    #region Scene Processing Methods
     /// <summary>
     /// Processes the designer components into the network data structure.
     /// </summary>
@@ -104,21 +107,21 @@ public sealed class PathingNetwork : MonoBehaviour
         }
 
         graphIndices = new Dictionary<Junction, int>();
-        nodeGraph = new AStarGraph();
+        nodeGraph = new NodeGraph();
         int insertionIndex = 0;
         foreach (Path path in floorPaths)
         {
             path.junctions.Sort();
             for (int i = 0; i < path.junctions.Count; i++)
             {
-                nodeGraph.AddNode(new AStarNode(path.junctions[i].intersection));
+                nodeGraph.AddNode(new GraphNode(path.junctions[i].intersection));
                 graphIndices.Add(path.junctions[i], insertionIndex);
                 insertionIndex++;
             }
             for (int i = 0; i < path.junctions.Count - 1; i++)
             {
-                AStarNode before = nodeGraph.nodes[graphIndices[path.junctions[i]]];
-                AStarNode after = nodeGraph.nodes[graphIndices[path.junctions[i + 1]]];
+                GraphNode before = nodeGraph.Nodes[graphIndices[path.junctions[i]]];
+                GraphNode after = nodeGraph.Nodes[graphIndices[path.junctions[i + 1]]];
                 before.AddLink(after);
                 after.AddLink(before);
             }
@@ -128,8 +131,8 @@ public sealed class PathingNetwork : MonoBehaviour
             path.junctions.Sort();
             for (int i = 0; i < path.junctions.Count - 1; i++)
             {
-                AStarNode before = nodeGraph.nodes[graphIndices[path.junctions[i]]];
-                AStarNode after = nodeGraph.nodes[graphIndices[path.junctions[i + 1]]];
+                GraphNode before = nodeGraph.Nodes[graphIndices[path.junctions[i]]];
+                GraphNode after = nodeGraph.Nodes[graphIndices[path.junctions[i + 1]]];
                 before.AddLink(after);
                 after.AddLink(before);
             }

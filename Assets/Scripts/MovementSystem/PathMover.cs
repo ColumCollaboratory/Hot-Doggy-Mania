@@ -25,7 +25,7 @@ public abstract class PathMover : MonoBehaviour
     public float CurrentDistance { get; protected set; }
     #endregion
     #region MonoBehaviour Implementation
-    private void Start()
+    public void Activate()
     {
         pathingNetwork.OnNetworkChanged += OnNetworkChanged;
         OnStart();
@@ -127,37 +127,47 @@ public abstract class PathMover : MonoBehaviour
     }
     #endregion
     #region Route Finding Methods
-    /// <summary>
-    /// Finds the route to a given path mover in the same network.
-    /// </summary>
-    /// <param name="target">The target path mover.</param>
-    /// <returns>An array of coordinates for the route.</returns>
-    protected List<Vector2> FindRoute(PathMover target)
-    {
-        return AStarPathFind(target.CurrentPath, target.CurrentDistance);
-    }
-    /// <summary>
-    /// Finds the route to the closest point to a given location.
-    /// </summary>
-    /// <param name="target">The target location to travel to.</param>
-    /// <returns>An array of coordinates for the route.</returns>
-    protected List<Vector2> FindRoute(Vector2 target)
+
+    protected bool TryFindRoute(Vector2 target, out Vector2[] path)
     {
         FindSnap(target, out Path nearPath, out float nearDistance);
-        return AStarPathFind(nearPath, nearDistance);
+        if (AStarPathFind(nearPath, nearDistance, out Vector2[] foundPath))
+        {
+            path = foundPath;
+            return true;
+        }
+        else
+        {
+            path = new Vector2[0];
+            return false;
+        }
     }
-    private List<Vector2> AStarPathFind(Path targetPath, float distanceOnTarget)
-    {
-        AStarGraph graph = pathingNetwork.NodeGraph;
 
-        AStarNode start = new AStarNode(GetLocation());
+    protected bool TryFindRoute(PathMover target, out Vector2[] path)
+    {
+        if (AStarPathFind(target.CurrentPath, target.CurrentDistance, out Vector2[] foundPath))
+        {
+            path = foundPath;
+            return true;
+        }
+        else
+        {
+            path = new Vector2[0];
+            return false;
+        }
+    }
+    private bool AStarPathFind(Path targetPath, float distanceOnTarget, out Vector2[] path)
+    {
+        NodeGraph graph = pathingNetwork.NodeGraph;
+
+        GraphNode start = new GraphNode(GetLocation());
         for (int i = 0; i < CurrentPath.junctions.Count; i++)
         {
             Junction junction = CurrentPath.junctions[i];
             float distance = (junction.pathA == CurrentPath) ? junction.distanceA : junction.distanceB;
             if (distance == CurrentDistance)
             {
-                start = graph.nodes[pathingNetwork.graphIndices[junction]];
+                start = graph.Nodes[pathingNetwork.graphIndices[junction]];
                 break;
             }
             else if (distance > CurrentDistance)
@@ -182,14 +192,14 @@ public abstract class PathMover : MonoBehaviour
                 endLocation = targetPath.start + distanceOnTarget * Vector2.up;
                 break;
         }
-        AStarNode end = new AStarNode(endLocation);
+        GraphNode end = new GraphNode(endLocation);
         for (int i = 0; i < targetPath.junctions.Count; i++)
         {
             Junction junction = targetPath.junctions[i];
             float distance = (junction.pathA == targetPath) ? junction.distanceA : junction.distanceB;
             if (distance == CurrentDistance)
             {
-                end = graph.nodes[pathingNetwork.graphIndices[junction]];
+                end = graph.Nodes[pathingNetwork.graphIndices[junction]];
                 break;
             }
             else if (distance > CurrentDistance)
@@ -204,76 +214,19 @@ public abstract class PathMover : MonoBehaviour
                 graph.AddNode(end, pathingNetwork.graphIndices[junction]);
         }
 
-        List<AStarNode> openNodes = new List<AStarNode>();
-        List<AStarNode> closedNodes = new List<AStarNode>();
-        closedNodes.Add(start);
-        start.h = Vector2.Distance(start.location, end.location);
-        start.g = 0;
-        start.f = start.h + start.g;
-        AStarNode current = start;
-        do
+        if (graph.TryFindPath(start, end, out GraphNode[] foundPath))
         {
-            foreach (AStarNode linked in current.linkedNodes)
-            {
-                if (!closedNodes.Contains(linked) && !openNodes.Contains(linked))
-                {
-                    if (linked == end)
-                    {
-                        List<Vector2> path = new List<Vector2>();
-                        path.Add(end.location);
-                        while (current.previous != null)
-                        {
-                            path.Add(current.previous.location);
-                            current = current.previous;
-                        }
-                        path.Reverse();
-                        return path;
-                    }
-                    else
-                    {
-                        openNodes.Add(linked);
-                        linked.previous = current;
-                        linked.h = Vector2.Distance(linked.location, end.location);
-                        linked.g = current.linkLengths[linked] + current.g;
-                        linked.f = linked.g + linked.h;
-                    }
-                }
-            }
-            AStarNode bestNode = null;
-            float bestF = float.MaxValue;
-            foreach (AStarNode node in openNodes)
-            {
-                if (current.linkedNodes.Contains(current))
-                {
-                    float newG = current.linkLengths[node] + current.g;
-                    if (newG < node.g)
-                    {
-                        node.previous = current;
-                        node.g = newG;
-                        node.f = node.g + node.h;
-                    }
-                }
-                if (node.f < bestF)
-                {
-                    bestNode = node;
-                    bestF = node.f;
-                }
-            }
-            openNodes.Remove(current);
-            closedNodes.Add(current);
-            current = bestNode;
+            Vector2[] rasterizedPath = new Vector2[foundPath.Length];
+            for (int i = 0; i < foundPath.Length; i++)
+                rasterizedPath[i] = foundPath[i].Location;
+            path = rasterizedPath;
+            return true;
         }
-        while (openNodes.Count > 0);
-        foreach (AStarNode node in graph.nodes)
+        else
         {
-            Debug.DrawRay(node.location, Vector2.up + Vector2.right, Color.red, 100);
-            foreach (AStarNode linkedNode in node.linkedNodes)
-            {
-                Debug.DrawLine(node.location, (Vector3)linkedNode.location + Vector3.back, Color.blue, 100);
-            }
+            path = new Vector2[0];
+            return false;
         }
-        Debug.Break();
-        throw new Exception("could not route");
     }
     #endregion
     #region Snap Finding Methods

@@ -18,7 +18,7 @@ public sealed class AIPathMover : PathMover
     #region Current Pathing State
     private float rethinkTimer = 0;
     private int currentPathIndex = 0;
-    private List<Vector2> currentPath = new List<Vector2>();
+    private Vector2[] currentPath = new Vector2[0];
     #endregion
     #region Path Mover Implementation
     protected sealed override void OnNetworkChanged()
@@ -32,13 +32,14 @@ public sealed class AIPathMover : PathMover
         rethinkTimer += Time.deltaTime;
         if (rethinkTimer > repathFrequency)
         {
-            currentPath = FindRoute(target);
+            if (TryFindRoute(target, out Vector2[] path))
+                currentPath = path;
             rethinkTimer -= repathFrequency;
             currentPathIndex = 1;
         }
 
         // Is there a path to follow?
-        if (currentPath.Count > 0 && currentPathIndex < currentPath.Count)
+        if (currentPath.Length > 0 && currentPathIndex < currentPath.Length)
         {
             // Follow the path.
             Vector2 direction = currentPath[currentPathIndex] - (Vector2)transform.position;
