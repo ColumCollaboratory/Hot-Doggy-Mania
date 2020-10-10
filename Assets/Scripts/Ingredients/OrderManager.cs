@@ -53,7 +53,7 @@ public class OrderManager : MonoBehaviour
         if(ordersCompleted>=ordersNeeded)
         {
             AudioSingleton.instance?.PlaySFX("Complete_Level");
-            if(SceneManager.GetActiveScene().buildIndex!=SceneManager.sceneCount-1)
+            if(SceneManager.GetActiveScene().buildIndex!=3)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
             }
