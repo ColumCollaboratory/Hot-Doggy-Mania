@@ -52,7 +52,7 @@ public class OrderManager : MonoBehaviour
         ordersCompleted++;
         if(ordersCompleted>=ordersNeeded)
         {
-            AudioSingleton.instance.PlaySFX("Complete_Level");
+            AudioSingleton.instance?.PlaySFX("Complete_Level");
             SceneManager.LoadScene(0);
         }
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
