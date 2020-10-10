@@ -9,20 +9,16 @@ public class IngredientSpawner : MonoBehaviour
     private List<GameObject> ingredientsToSpawn;
     [SerializeField]
     [Tooltip("Minimum time before spawning another item")]
-    float spawnInterval = 1;
+    float spawnInterval = 2;
 
-    private bool canSpawn = true;
+    private bool canSpawn = false;
     private List<GameObject> ingredientsInSpawnZone = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        //Sometimes double spawns for some reason
-        if(canSpawn==true)
-        {
-            StartCoroutine(SpawnInterval());
             SpawnRandomIngredient();
-        }
+            StartCoroutine(SpawnInterval());
     }
 
     // Update is called once per frame
@@ -54,7 +50,7 @@ public class IngredientSpawner : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collider Entered");
+        Debug.Log("Ingredient Spawned");
         ingredientsInSpawnZone.Add(collision.gameObject);
     }
 

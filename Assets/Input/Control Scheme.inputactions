@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "DropIngredient",
+                    "type": "Button",
+                    "id": "652a0c2d-223e-4b67-9ba4-f6295630a701",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -196,7 +204,7 @@
                 {
                     "name": "",
                     "id": "daebc388-9fdd-4ed5-aeb5-e31c9f3b6e26",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -207,7 +215,7 @@
                 {
                     "name": "",
                     "id": "7e40442c-6eb8-4a28-803c-009bf6e76898",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -218,7 +226,7 @@
                 {
                     "name": "",
                     "id": "43f10a91-40f1-445f-b637-1dbfae2b64be",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -245,6 +253,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "39312363-86e7-40dc-83ce-14d5abc3f5a7",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropIngredient",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9b92f33-8f7b-4704-8d76-ebed03486100",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropIngredient",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b1a0d5f-c682-4833-b116-958864589265",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropIngredient",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

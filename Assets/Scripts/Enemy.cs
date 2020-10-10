@@ -36,9 +36,20 @@ public class Enemy : MonoBehaviour
         {
             if(collision.GetComponent<Ingredients>().GetFalling()==true&&canDie==true)
             {
-                StartCoroutine("DownEnemy");
+                Down();
             }
         }
+    }
+
+    public bool GetCanDie()
+    {
+        return canDie;
+    }
+
+    public void Down()
+    {
+        StartCoroutine("DownEnemy");
+        Debug.Log("Downed Enemey");
     }
 
     IEnumerator DownEnemy()

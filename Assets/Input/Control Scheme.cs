@@ -49,6 +49,14 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DropIngredient"",
+                    ""type"": ""Button"",
+                    ""id"": ""652a0c2d-223e-4b67-9ba4-f6295630a701"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -209,7 +217,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""daebc388-9fdd-4ed5-aeb5-e31c9f3b6e26"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -220,7 +228,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7e40442c-6eb8-4a28-803c-009bf6e76898"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -231,7 +239,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""43f10a91-40f1-445f-b637-1dbfae2b64be"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -260,6 +268,39 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39312363-86e7-40dc-83ce-14d5abc3f5a7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropIngredient"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9b92f33-8f7b-4704-8d76-ebed03486100"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropIngredient"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b1a0d5f-c682-4833-b116-958864589265"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropIngredient"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -272,6 +313,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         m_Gameplay_Climb = m_Gameplay.FindAction("Climb", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_DropIngredient = m_Gameplay.FindAction("DropIngredient", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -325,6 +367,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Climb;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_DropIngredient;
     public struct GameplayActions
     {
         private @ControlScheme m_Wrapper;
@@ -333,6 +376,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         public InputAction @Climb => m_Wrapper.m_Gameplay_Climb;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @DropIngredient => m_Wrapper.m_Gameplay_DropIngredient;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -354,6 +398,9 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @DropIngredient.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDropIngredient;
+                @DropIngredient.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDropIngredient;
+                @DropIngredient.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDropIngredient;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -370,6 +417,9 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @DropIngredient.started += instance.OnDropIngredient;
+                @DropIngredient.performed += instance.OnDropIngredient;
+                @DropIngredient.canceled += instance.OnDropIngredient;
             }
         }
     }
@@ -380,5 +430,6 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         void OnClimb(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDropIngredient(InputAction.CallbackContext context);
     }
 }

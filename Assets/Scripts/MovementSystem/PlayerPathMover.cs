@@ -15,6 +15,8 @@ public sealed class PlayerPathMover : PathMover
     [SerializeField] private float walkSpeed = 1;
     [Range(0, 10)][Header("The vertical speed of the character.")]
     [SerializeField] private float climbSpeed = 1;
+
+    private float currentAxis=1;
     #endregion
     #region Path Mover Implementation
     protected sealed override void OnNetworkChanged()
@@ -53,7 +55,7 @@ public sealed class PlayerPathMover : PathMover
         climbAxis = context.ReadValue<float>();
     }
 
-    public void Attack(InputAction.CallbackContext context)
+    public void DropIngredient(InputAction.CallbackContext context)
     {
         if (context.ReadValueAsButton())
         {
@@ -84,4 +86,6 @@ public sealed class PlayerPathMover : PathMover
         if (context.ReadValueAsButton())
             Application.Quit();
     }
+
+    
 }
