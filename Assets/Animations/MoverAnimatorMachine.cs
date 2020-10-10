@@ -9,7 +9,14 @@ public class MoverAnimatorMachine : MonoBehaviour
     [SerializeField] private PathMover pathMover = null;
     [SerializeField] private float idleTolerance = 0.001f;
 
-    private Vector2 lastLocation = Vector2.zero;
+    private Vector2 lastLocation;
+
+    private bool isMovingRight=true;
+
+    private void Start()
+    {
+        lastLocation = transform.position;
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,11 +34,18 @@ public class MoverAnimatorMachine : MonoBehaviour
         else
             animator.SetBool("Is Moving", true);
 
-        if ((lastLocation - (Vector2)transform.position).x > 0)
-            renderer.flipX = true;
-        else
-            renderer.flipX = false;
-
+        if ((lastLocation - (Vector2)transform.position).x > 0 && isMovingRight == true)
+            Flip();
+        else if ((lastLocation - (Vector2)transform.position).x < 0 && isMovingRight == false)
+            Flip();
+        
         lastLocation = transform.position;
+    }
+    private void Flip()
+    {
+        Vector2 tempScale = transform.parent.localScale;
+        tempScale.x *= -1;
+        transform.parent.localScale = tempScale;
+        isMovingRight = !isMovingRight;
     }
 }
