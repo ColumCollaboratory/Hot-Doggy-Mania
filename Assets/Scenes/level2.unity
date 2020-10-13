@@ -1664,8 +1664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c14b62ada7ebd4a9c8578b7636635c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ordersOnScreen: 1
-  ordersNeeded: 5
+  ordersOnScreen: 3
+  ordersNeeded: 3
   orderPrefabs:
   - {fileID: 2069636450657457798, guid: 89b391d94902c5844ba487c1438e6a4b, type: 3}
   - {fileID: 2359035703456054105, guid: 359575f56c479754f9092244bd478005, type: 3}
@@ -2718,6 +2718,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6776748109445869840, guid: 0686bc749e63e0541a4e37cbb9a13155,
+        type: 3}
+      propertyPath: ingredientsToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6776748109445869843, guid: 0686bc749e63e0541a4e37cbb9a13155,
         type: 3}
       propertyPath: m_Name
@@ -3443,6 +3448,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6776748109445869840, guid: 0686bc749e63e0541a4e37cbb9a13155,
+        type: 3}
+      propertyPath: ingredientsToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6776748109445869843, guid: 0686bc749e63e0541a4e37cbb9a13155,
         type: 3}
       propertyPath: m_Name
@@ -4779,6 +4789,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6776748109445869840, guid: 0686bc749e63e0541a4e37cbb9a13155,
+        type: 3}
+      propertyPath: ingredientsToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6776748109445869843, guid: 0686bc749e63e0541a4e37cbb9a13155,
         type: 3}
       propertyPath: m_Name
@@ -7233,6 +7248,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6776748109445869840, guid: 0686bc749e63e0541a4e37cbb9a13155,
+        type: 3}
+      propertyPath: ingredientsToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6776748109445869843, guid: 0686bc749e63e0541a4e37cbb9a13155,
         type: 3}
       propertyPath: m_Name
