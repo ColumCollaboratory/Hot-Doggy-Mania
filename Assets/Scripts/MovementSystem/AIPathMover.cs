@@ -11,9 +11,16 @@ public sealed class AIPathMover : PathMover
     [Tooltip("The current target to chase after.")]
     [SerializeField] private PathMover target = null;
     [Range(0f, 10f)][Tooltip("The speed of the AI.")]
-    [SerializeField] private float speed = 1;
+    [SerializeField] private float speed = 1f;
     [Range(0.1f, 10f)][Tooltip("How often the AI will recalculate its path.")]
-    [SerializeField] private float repathFrequency = 1;
+    [SerializeField] private float repathFrequency = 1f;
+    [Tooltip("The number of units the AIs target is from the player.")]
+    [SerializeField] private float targetDeviation = 0f;
+    private void OnValidate()
+    {
+        if (targetDeviation < 0f)
+            targetDeviation = 0f;
+    }
     #endregion
     #region Current Pathing State
     private float rethinkTimer = 0;
@@ -32,7 +39,10 @@ public sealed class AIPathMover : PathMover
         rethinkTimer += Time.deltaTime;
         if (rethinkTimer > repathFrequency)
         {
-            if (TryFindRoute(target, out Vector2[] path))
+            float randomAngle = Random.Range(0f, Mathf.PI * 2f);
+            Vector2 randomDirection = new Vector2(Mathf.Sin(randomAngle), Mathf.Cos(randomAngle));
+            Vector2 pathTo = (Vector2)target.transform.position + randomDirection * targetDeviation;
+            if (TryFindRoute(pathTo, out Vector2[] path))
                 currentPath = path;
             rethinkTimer -= repathFrequency;
             currentPathIndex = 1;
