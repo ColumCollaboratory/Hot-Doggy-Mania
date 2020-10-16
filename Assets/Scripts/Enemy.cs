@@ -29,8 +29,17 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Collided With Player");
             AudioSingleton.instance?.PlaySFX("Lose_Life");
-            AudioSingleton.instance?.PlayBGM("Menu_BGM");
-            SceneManager.LoadScene(0);
+            if(PlayerLives.Lives>1)
+            {
+                PlayerLives.Lives = PlayerLives.Lives - 1;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            else
+            {
+                PlayerLives.Lives = 3;
+                SceneManager.LoadScene(0);
+                AudioSingleton.instance?.PlayBGM("Menu_BGM");
+            }
         }
         if(collision.GetComponent<Ingredients>())
         {
