@@ -6,6 +6,8 @@ public class Orders : MonoBehaviour
 {
     [SerializeField]
     private List<string> ingredientsNeeded;
+    [SerializeField]
+    private List<GameObject> ingredientCheckBoxes;
 
     private OrderManager orderManager;
 
@@ -40,7 +42,11 @@ public class Orders : MonoBehaviour
             }
             if (ingredientFound == true)
             {
+                int ingredientIndex=ingredientsNeeded.IndexOf(ingredient.GetName());
                 ingredientsNeeded.Remove(ingredient.GetName());
+                Color opaque = new Color(0, 230, 0, 1);
+                ingredientCheckBoxes[ingredientIndex].GetComponent<SpriteRenderer>().color = opaque;
+                ingredientCheckBoxes.Remove(ingredientCheckBoxes[ingredientIndex]);
                 orderManager.AddPoints(10);
                 if (ingredientsNeeded.Count == 0)
                 {
