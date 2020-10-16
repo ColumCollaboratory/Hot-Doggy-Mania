@@ -1600,6 +1600,7 @@ MonoBehaviour:
   - {fileID: 5120767957493986043, guid: ba93cc8c9b42f254c991c75738de575a, type: 3}
   - {fileID: 3879767755280787611, guid: 08c5d28fd547620488de312379590eaf, type: 3}
   - {fileID: 622071014279287461, guid: ab6f17a9627615944b3d75c81be9cea8, type: 3}
+  - {fileID: 2168851134836507382, guid: bb26d90898b082f48960fc36f087ae8e, type: 3}
   spawnInterval: 1
 --- !u!212 &146526118
 SpriteRenderer:
@@ -15237,6 +15238,7 @@ MonoBehaviour:
   - {fileID: 5120767957493986043, guid: ba93cc8c9b42f254c991c75738de575a, type: 3}
   - {fileID: 3879767755280787611, guid: 08c5d28fd547620488de312379590eaf, type: 3}
   - {fileID: 622071014279287461, guid: ab6f17a9627615944b3d75c81be9cea8, type: 3}
+  - {fileID: 2168851134836507382, guid: bb26d90898b082f48960fc36f087ae8e, type: 3}
   spawnInterval: 1
 --- !u!212 &1318543459
 SpriteRenderer:
@@ -17598,6 +17600,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1524195544}
     m_Modifications:
+    - target: {fileID: 5939742027745868052, guid: e30e4de4491e476449ea0c2e334e137b,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5939742027745868053, guid: e30e4de4491e476449ea0c2e334e137b,
         type: 3}
       propertyPath: m_Name
@@ -17988,6 +17995,7 @@ MonoBehaviour:
   - {fileID: 5120767957493986043, guid: ba93cc8c9b42f254c991c75738de575a, type: 3}
   - {fileID: 3879767755280787611, guid: 08c5d28fd547620488de312379590eaf, type: 3}
   - {fileID: 622071014279287461, guid: ab6f17a9627615944b3d75c81be9cea8, type: 3}
+  - {fileID: 2168851134836507382, guid: bb26d90898b082f48960fc36f087ae8e, type: 3}
   spawnInterval: 1
 --- !u!212 &1593623252
 SpriteRenderer:
@@ -24230,10 +24238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1983796817, guid: d2ac1b37b15fdc141821ac87199f7262, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 133168839755159600, guid: d2ac1b37b15fdc141821ac87199f7262,
         type: 3}
       propertyPath: m_Name
