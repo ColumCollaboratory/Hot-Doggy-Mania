@@ -11,8 +11,6 @@ public class SceneManagement : MonoBehaviour
     private GameObject creditsMenuPanel;
     [SerializeField]
     private GameObject titleMenuPanel;
-    [SerializeField]
-    private GameObject instructionsMenuPanel;
 
     private void Start()
     {
@@ -29,7 +27,6 @@ public class SceneManagement : MonoBehaviour
     {
         titleMenuPanel.SetActive(true);
         AudioSingleton.instance?.PlaySFX("Credits_Close");
-        instructionsMenuPanel.SetActive(false);
         creditsMenuPanel.SetActive(false);
     }
 
@@ -38,13 +35,6 @@ public class SceneManagement : MonoBehaviour
         AudioSingleton.instance?.PlaySFX("Credits_Open");
         creditsMenuPanel.SetActive(true);
         titleMenuPanel.SetActive(false);
-    }
-
-    public void ShowInstructions()
-    {
-        titleMenuPanel.SetActive(false);
-        AudioSingleton.instance?.PlaySFX("Credits_Close");
-        instructionsMenuPanel.SetActive(true);
     }
 
     public void ExitGame()

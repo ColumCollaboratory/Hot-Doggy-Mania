@@ -47,9 +47,8 @@ public class IngredientSpawner : MonoBehaviour
         //Instantiates at spawner equal to current X value (first order spawns at location 1)
         if(ingredientsToSpawn[randomPrefab].GetComponent<Ingredients>().GetIsSalt()==true)
         {
-            int x = Random.Range(0, 4);
-            //powerup only has a 75% chance to actually spawn
-            if (x==0)
+            //powerup only has a 50% chance to actually spawn
+            if(Random.Range(0,1)==0)
             {
                 randomPrefab = Random.Range(0, ingredientsToSpawn.Count);
             }
@@ -60,18 +59,12 @@ public class IngredientSpawner : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ingredient Spawned");
-        if(collision.gameObject.GetComponent<Ingredients>()!=null)
-        {
-            ingredientsInSpawnZone.Add(collision.gameObject);
-        }
+        ingredientsInSpawnZone.Add(collision.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<Ingredients>()!=null)
-        {
         ingredientsInSpawnZone.Remove(collision.gameObject);
-        }
     }
 
     IEnumerator SpawnInterval()
