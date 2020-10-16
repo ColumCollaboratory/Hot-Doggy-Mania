@@ -45,6 +45,14 @@ public class IngredientSpawner : MonoBehaviour
         //Stores a random prefab from the list
         int randomPrefab = Random.Range(0, ingredientsToSpawn.Count);
         //Instantiates at spawner equal to current X value (first order spawns at location 1)
+        if(ingredientsToSpawn[randomPrefab].GetComponent<Ingredients>().GetIsSalt()==true)
+        {
+            //powerup only has a 50% chance to actually spawn
+            if(Random.Range(0,1)==0)
+            {
+                randomPrefab = Random.Range(0, ingredientsToSpawn.Count);
+            }
+        }
         GameObject newIngredient = Instantiate(ingredientsToSpawn[randomPrefab], gameObject.transform.position, new Quaternion());
         newIngredient.GetComponent<Ingredients>().Fall();
     }

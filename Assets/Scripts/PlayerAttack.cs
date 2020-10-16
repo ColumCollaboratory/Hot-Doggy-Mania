@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         currentUses = maxUses;
+        Debug.Log("Current Uses: "+currentUses);
         attackCollider.gameObject.SetActive(false);
     }
 
@@ -29,10 +30,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.ReadValueAsButton())
         {
-            if(canAttack==true)
+            if(canAttack==true&&currentUses>0)
             {
                 StartCoroutine("AttackTimeFrame");
                 StartCoroutine("AttackCooldown");
+                currentUses--;
             }
         }
     }
@@ -48,5 +50,16 @@ public class PlayerAttack : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(attackCD);
         canAttack = true;
+    }
+
+    public void AddUse(GameObject powerup)
+    {
+        if(currentUses<maxUses)
+        {
+            Debug.Log("Current Uses: " + currentUses);
+            currentUses++;
+            Destroy(powerup);
+            Debug.Log("Current Uses: " + currentUses);
+        }
     }
 }

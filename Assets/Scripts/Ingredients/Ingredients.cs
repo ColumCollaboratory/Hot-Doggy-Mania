@@ -12,6 +12,8 @@ public class Ingredients : MonoBehaviour
     private float distanceBetweenConveyers = 4;
     [SerializeField]
     private float fallingSpeed = 1;
+    [SerializeField]
+    private bool isSalt=false;
 
     private GameObject storedPlayer;
     private float conveyerSpeed = 2;
@@ -93,6 +95,10 @@ public class Ingredients : MonoBehaviour
         {
             storedPlayer = collision.gameObject.transform.GetChild(0).gameObject;
             canFall = true;
+            if (isSalt==true)
+            {
+                collision.gameObject.GetComponent<PlayerAttack>().AddUse(this.gameObject);
+            }
         }
     }
 
@@ -118,5 +124,10 @@ public class Ingredients : MonoBehaviour
     public bool GetFalling()
     {
         return isFalling;
+    }
+
+    public bool GetIsSalt()
+    {
+        return isSalt;
     }
 }
