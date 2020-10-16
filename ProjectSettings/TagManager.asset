@@ -53,3 +53,6 @@ TagManager:
   - name: Ingredients
     uniqueID: 2134656583
     locked: 0
+  - name: Trash
+    uniqueID: 1310993743
+    locked: 0

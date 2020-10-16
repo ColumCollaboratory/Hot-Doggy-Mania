@@ -68,7 +68,7 @@ public class Ingredients : MonoBehaviour
             Destroy(this.gameObject);
         }
         //MOVE LEFT
-        if (transform.position.y<-2||(transform.position.y>0&&transform.position.y<3)||transform.position.y>8)
+        if (transform.position.y<-4||(transform.position.y>0&&transform.position.y<3)||transform.position.y>8)
         {
             transform.Translate(new Vector2(-1, 0) * Time.deltaTime * conveyerSpeed);
             //Teleport to other side of screen when offscreen
