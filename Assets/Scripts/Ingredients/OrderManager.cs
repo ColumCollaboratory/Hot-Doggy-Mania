@@ -83,12 +83,12 @@ public class OrderManager : MonoBehaviour
     public void AddPoints(int points)
     {
         score += points;
-        scoreText.text = score.ToString();
+        Score.score = score;
     }
 
     public void SubtractPoints(int points)
     {
         score -= points;
-        scoreText.text = score.ToString();
+        Score.score = score;
     }
 }
