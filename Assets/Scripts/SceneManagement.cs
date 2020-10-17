@@ -22,7 +22,7 @@ public class SceneManagement : MonoBehaviour
     public void LoadGameScene()
     {
         SceneManager.LoadScene(gameSceneName);
-        AudioSingleton.instance?.PlayBGM("Gameplay_BGM");
+        AudioSingleton.instance?.PlayBGM("Game_BGM");
     }
 
     public void ShowTitle()

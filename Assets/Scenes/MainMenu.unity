@@ -2204,7 +2204,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 2f1919e3d1947d34395ad340a3f9a874, type: 3}
+      objectReference: {fileID: 8300000, guid: 8bcfb5e8e51aa9d4f9f93c08f222b9d0, type: 3}
     - target: {fileID: 8642314771575237864, guid: 789b10c459ec24f4f8cc2527a0360b35,
         type: 3}
       propertyPath: m_Name
@@ -5039,8 +5039,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2134656583
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 074b9ba90fe45bf4dac22ee15ae36c6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5279,8 +5279,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2134656583
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 074b9ba90fe45bf4dac22ee15ae36c6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
