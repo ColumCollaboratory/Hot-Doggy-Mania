@@ -126,7 +126,7 @@ public class Ingredients : MonoBehaviour
     {
         if (storedPlayer != null)
         {
-            storedPlayer.gameObject.GetComponent<Animator>().SetTrigger("pushIngredient");
+            storedPlayer.gameObject.GetComponent<Animator>().SetTrigger("Push");
         }
         isFalling = true;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
