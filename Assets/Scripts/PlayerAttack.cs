@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
@@ -14,6 +15,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     [Tooltip("How long the attack collider is active")]
     private float attackTimeFrame=0.5f;
+    [SerializeField]
+    private GameObject saltOne;
+    [SerializeField]
+    private GameObject saltTwo;
+    [SerializeField]
+    private GameObject saltThree;
 
     private int currentUses;
     private bool canAttack = true;
@@ -37,6 +44,18 @@ public class PlayerAttack : MonoBehaviour
                 StartCoroutine("AttackTimeFrame");
                 StartCoroutine("AttackCooldown");
                 currentUses--;
+                if(currentUses==2)
+                {
+                    saltThree.SetActive(false);
+                }
+                else if(currentUses==1)
+                {
+                    saltTwo.SetActive(false);
+                }
+                else
+                {
+                    saltOne.SetActive(false);
+                }
             }
         }
     }
@@ -58,10 +77,20 @@ public class PlayerAttack : MonoBehaviour
     {
         if(currentUses<maxUses)
         {
-            Debug.Log("Current Uses: " + currentUses);
             currentUses++;
             Destroy(powerup);
-            Debug.Log("Current Uses: " + currentUses);
+            if (currentUses == 3)
+            {
+                saltThree.SetActive(true);
+            }
+            else if (currentUses == 2)
+            {
+                saltTwo.SetActive(true);
+            }
+            else
+            {
+                saltOne.SetActive(true);
+            }
         }
     }
 }

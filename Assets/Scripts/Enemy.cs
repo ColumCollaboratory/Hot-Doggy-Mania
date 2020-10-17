@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour
             if(collision.GetComponent<Ingredients>().GetFalling()==true&&canDie==true)
             {
                 AudioSingleton.instance?.PlaySFX("Squish_Enemy");
+                Score.score += 20;
                 Down();
             }
         }
