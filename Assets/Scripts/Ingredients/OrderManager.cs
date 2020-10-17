@@ -19,12 +19,9 @@ public class OrderManager : MonoBehaviour
     [Tooltip("The locations where Orders will spawn. NEEDS AN AMOUNT EQUAL TO ORDERS ON SCREEN")]
     private List<Transform> orderSpawnLocations;
     [SerializeField]
-    private Text scoreText;
-    [SerializeField]
     private Text ordersRemainingText;
 
     private int ordersCompleted;
-    private int score;
 
     //The orders currently in play
     private List<GameObject> currentOrders;
@@ -33,8 +30,6 @@ public class OrderManager : MonoBehaviour
     void Start()
     {
         ordersCompleted = 0;
-        score = 0;
-        scoreText.text = score.ToString();
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //If manually putting in starting prefabs, comment this out
         /*for(int x=0;x<ordersOnScreen;x++)
@@ -59,7 +54,7 @@ public class OrderManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(4);
             }
         }
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
@@ -82,13 +77,11 @@ public class OrderManager : MonoBehaviour
     
     public void AddPoints(int points)
     {
-        score += points;
-        Score.score = score;
+        Score.score = Score.score+points;
     }
 
     public void SubtractPoints(int points)
     {
-        score -= points;
-        Score.score = score;
+        Score.score = Score.score-points;
     }
 }

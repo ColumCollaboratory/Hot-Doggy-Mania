@@ -70,7 +70,10 @@ public sealed class AudioSingleton : MonoBehaviour
         {
             sfxSource.volume = sfxVolume;
             bgmSource.volume = bgmVolume;
-            muteButton.GetComponent<Image>().color=muteButtonColor;
+            if(muteButton!=null)
+            {
+                muteButton.GetComponent<Image>().color = muteButtonColor;
+            }
             isMuted = false;
         }
         else
@@ -78,7 +81,10 @@ public sealed class AudioSingleton : MonoBehaviour
             sfxSource.volume = 0;
             bgmSource.volume = 0;
             isMuted = true;
-            muteButton.GetComponent<Image>().color=muteGray;
+            if (muteButton != null)
+            {
+                muteButton.GetComponent<Image>().color = muteGray;
+            }
         }
     }
 
@@ -86,7 +92,7 @@ public sealed class AudioSingleton : MonoBehaviour
     {
         if (context.ReadValueAsButton())
         {
-            ToggleMute();
+            //ToggleMute();
         }
     }
 
