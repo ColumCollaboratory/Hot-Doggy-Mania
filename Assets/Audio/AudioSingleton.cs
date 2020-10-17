@@ -92,7 +92,7 @@ public sealed class AudioSingleton : MonoBehaviour
 
     private void Update()
     {
-        if(isRamping==true)
+        if(isRamping==true&&isMuted==false)
         {
             if (bgmSource.volume < bgmVolume)
             {
