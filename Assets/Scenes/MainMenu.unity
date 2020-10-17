@@ -2125,6 +2125,71 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: clipNames.Array.size
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.data[15]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6062d3311aa4c06419c24f1f8ac64ee7, type: 3}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.data[16]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6062d3311aa4c06419c24f1f8ac64ee7, type: 3}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.data[17]
+      value: 
+      objectReference: {fileID: 8300000, guid: 04bdd2f4034e7cb418c14f5634a58371, type: 3}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.data[18]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ec536d659e0cd44cb2453580ee2fc52, type: 3}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: clipNames.Array.data[15]
+      value: Correct_Ingredient_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: clipNames.Array.data[16]
+      value: Correct_Ingredient_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: clipNames.Array.data[17]
+      value: Correct_Ingredient_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: clipNames.Array.data[18]
+      value: Squish_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 01d28e9f200300b4799300612f7542f4, type: 3}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8bcfb5e8e51aa9d4f9f93c08f222b9d0, type: 3}
+    - target: {fileID: 904319068122532147, guid: 789b10c459ec24f4f8cc2527a0360b35,
+        type: 3}
+      propertyPath: clipNames.Array.data[1]
+      value: Game_BGM
+      objectReference: {fileID: 0}
     - target: {fileID: 4038747631879261192, guid: 789b10c459ec24f4f8cc2527a0360b35,
         type: 3}
       propertyPath: m_Volume
@@ -6675,7 +6740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1700005261
 RectTransform:
   m_ObjectHideFlags: 0

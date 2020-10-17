@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
         {
             if(collision.GetComponent<Ingredients>().GetFalling()==true&&canDie==true)
             {
+                AudioSingleton.instance?.PlaySFX("Squish_Enemy");
                 Down();
             }
         }
@@ -65,7 +66,6 @@ public class Enemy : MonoBehaviour
     {
         this.transform.Rotate(new Vector3(0, 0, 90));
         gameObject.GetComponentInParent<AIPathMover>().enabled = false;
-        AudioSingleton.instance?.PlaySFX("Spray_Enemy");
         canDie = false;
         canKill = false;
         yield return new WaitForSeconds(downTimer);
