@@ -57,6 +57,14 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Mute"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fdbe210-f033-461e-a467-9d3c57576cf6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -301,6 +309,28 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                     ""action"": ""DropIngredient"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""95242e30-6af2-4dac-b9a0-8bd62825e61d"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33dcea24-717b-401d-be9e-0541a33565ce"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -314,6 +344,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_DropIngredient = m_Gameplay.FindAction("DropIngredient", throwIfNotFound: true);
+        m_Gameplay_Mute = m_Gameplay.FindAction("Mute", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -368,6 +399,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_DropIngredient;
+    private readonly InputAction m_Gameplay_Mute;
     public struct GameplayActions
     {
         private @ControlScheme m_Wrapper;
@@ -377,6 +409,7 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @DropIngredient => m_Wrapper.m_Gameplay_DropIngredient;
+        public InputAction @Mute => m_Wrapper.m_Gameplay_Mute;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -401,6 +434,9 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 @DropIngredient.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDropIngredient;
                 @DropIngredient.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDropIngredient;
                 @DropIngredient.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDropIngredient;
+                @Mute.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMute;
+                @Mute.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMute;
+                @Mute.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMute;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -420,6 +456,9 @@ public class @ControlScheme : IInputActionCollection, IDisposable
                 @DropIngredient.started += instance.OnDropIngredient;
                 @DropIngredient.performed += instance.OnDropIngredient;
                 @DropIngredient.canceled += instance.OnDropIngredient;
+                @Mute.started += instance.OnMute;
+                @Mute.performed += instance.OnMute;
+                @Mute.canceled += instance.OnMute;
             }
         }
     }
@@ -431,5 +470,6 @@ public class @ControlScheme : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDropIngredient(InputAction.CallbackContext context);
+        void OnMute(InputAction.CallbackContext context);
     }
 }

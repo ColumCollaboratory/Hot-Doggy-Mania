@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Mute",
+                    "type": "Button",
+                    "id": "0fdbe210-f033-461e-a467-9d3c57576cf6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -286,6 +294,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DropIngredient",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95242e30-6af2-4dac-b9a0-8bd62825e61d",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mute",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33dcea24-717b-401d-be9e-0541a33565ce",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mute",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
