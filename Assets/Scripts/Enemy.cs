@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 PlayerLives.Lives = 3;
+                Score.score = 0;
                 SceneManager.LoadScene(0);
                 AudioSingleton.instance?.PlayBGM("Menu_BGM");
             }
