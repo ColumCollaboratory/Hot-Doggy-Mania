@@ -9,12 +9,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     [Tooltip("How long the enemy is downed for")]
     private float downTimer=5;
-    [SerializeField]
-    private GameObject lifeOne;
-    [SerializeField]
-    private GameObject lifeTwo;
-    [SerializeField]
-    private GameObject lifeThree;
     bool canKill = true;
     //Prevents enemy dying while already dead
     bool canDie = true;
@@ -40,21 +34,11 @@ public class Enemy : MonoBehaviour
             {
                 PlayerLives.Lives = PlayerLives.Lives - 1;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                if (PlayerLives.Lives == 2)
-                {
-                    lifeThree.SetActive(false);
-                }
-                else if (PlayerLives.Lives == 1)
-                {
-                    lifeTwo.SetActive(false);
-                }
             }
             else
             {
                 PlayerLives.Lives = 3;
                 SceneManager.LoadScene(0);
-                lifeTwo.SetActive(true);
-                lifeThree.SetActive(true);
                 AudioSingleton.instance?.PlayBGM("Menu_BGM");
             }
         }

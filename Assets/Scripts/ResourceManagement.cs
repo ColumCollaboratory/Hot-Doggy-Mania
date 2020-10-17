@@ -17,6 +17,11 @@ public class ResourceManagement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (PlayerLives.Lives == 2)
         {
             lifeThree.SetActive(false);
@@ -26,11 +31,6 @@ public class ResourceManagement : MonoBehaviour
             lifeThree.SetActive(false);
             lifeTwo.SetActive(false);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         scoreCounter.text = Score.score.ToString();
     }
 }
