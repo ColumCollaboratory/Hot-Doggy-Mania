@@ -22,14 +22,17 @@ public class ResourceManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerLives.Lives == 2)
+        if(lifeOne!=null&&lifeTwo!=null&&lifeThree!=null)
         {
-            lifeThree.SetActive(false);
-        }
-        else if (PlayerLives.Lives == 1)
-        {
-            lifeThree.SetActive(false);
-            lifeTwo.SetActive(false);
+            if (PlayerLives.Lives == 2)
+            {
+                lifeThree.SetActive(false);
+            }
+            else if (PlayerLives.Lives == 1)
+            {
+                lifeThree.SetActive(false);
+                lifeTwo.SetActive(false);
+            }
         }
         scoreCounter.text = Score.score.ToString();
     }
