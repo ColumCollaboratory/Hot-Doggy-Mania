@@ -7,6 +7,8 @@ public sealed class MainMenuInteraction : MonoBehaviour
     #region JavaScript Interface
     [DllImport("__Internal")]
     private static extern void Quit();
+    [DllImport("__Internal")]
+    private static extern void SetFullscreen(bool isFullscreen);
     #endregion
     #region Inspector Fields
     [Tooltip("The name of the first stage to load on play.")]
@@ -21,14 +23,42 @@ public sealed class MainMenuInteraction : MonoBehaviour
     [SerializeField] private GameObject instructionsPanel = null;
     [Tooltip("The animator that drives the overlay elements.")]
     [SerializeField] private Animator titleAnimator = null;
+    [Tooltip("The animator that drives the pause elements.")]
+    [SerializeField] private Animator pauseAnimator = null;
     [Tooltip("The script that controlls the credit scrolling behaviour.")]
     [SerializeField] private CreditsScroll creditsScroll = null;
+    [Tooltip("The renderer for the fullscreen button.")]
+    [SerializeField] private ToggleButtonRenderer fullscreenButton = null;
     #endregion
+
+    private bool isFullscreen;
+
+    public void ToggleFullscreen()
+    {
+        isFullscreen = !isFullscreen;
+        fullscreenButton.IsToggled = isFullscreen;
+        switch (Application.platform)
+        {
+            case RuntimePlatform.OSXEditor:
+            case RuntimePlatform.LinuxEditor:
+            case RuntimePlatform.WindowsEditor:
+                Debug.Log("Fullscreen Toggled");
+                break;
+            case RuntimePlatform.WebGLPlayer:
+                SetFullscreen(isFullscreen);
+                break;
+            default:
+                Screen.fullScreen = true;
+                break;
+        }
+    }
 
     public void LoadGameScene()
     {
         SceneManager.LoadScene(firstStageScene);
         AudioSingleton.PlayBGM(BackgroundMusic.Gameplay);
+        pauseAnimator.SetTrigger("Unpaused");
+        titleAnimator.SetTrigger("Unpaused");
     }
     public void ShowTitle()
     {

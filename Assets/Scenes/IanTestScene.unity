@@ -1900,8 +1900,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164925907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.25, z: 0}
-  m_LocalScale: {x: 9.091479, y: 9.091479, z: 9.091479}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 27
@@ -4169,7 +4169,6 @@ MonoBehaviour:
   - {fileID: 8402368162232619352, guid: 3a357b96af8eb0848b104d89e39af2ee, type: 3}
   orderSpawnLocations:
   - {fileID: 151226399}
-  scoreText: {fileID: 1224087320}
   ordersRemainingText: {fileID: 1087320987}
 --- !u!4 &351595928
 Transform:
@@ -6052,7 +6051,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 23
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
