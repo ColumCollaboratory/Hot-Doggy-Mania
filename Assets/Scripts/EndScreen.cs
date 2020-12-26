@@ -7,7 +7,7 @@ public class EndScreen : MonoBehaviour
 {
     private void Start()
     {
-        AudioSingleton.instance?.PlayBGM("Menu_BGM");
+        AudioSingleton.PlayBGM(BackgroundMusic.MainMenu);
     }
 
     public void ReturnMainMenu()

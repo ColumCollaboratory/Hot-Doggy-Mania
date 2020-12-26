@@ -51,31 +51,19 @@ public class Orders : MonoBehaviour
                 if (ingredientsNeeded.Count == 0)
                 {
                     orderManager.AddPoints(20);
-                    AudioSingleton.instance?.PlaySFX("Complete_Order");
+                    AudioSingleton.PlaySFX(SoundEffect.OrderComplete);
                     orderManager.SpawnNewOrder(this.transform.position);
                     Destroy(this.gameObject);
                 }
                 else
                 {
-                    int randomSFX = Random.Range(0, 4);
-                    if (randomSFX == 0)
-                    {
-                        AudioSingleton.instance?.PlaySFX("Correct_Ingredient_1");
-                    }
-                    else if (randomSFX == 1)
-                    {
-                        AudioSingleton.instance?.PlaySFX("Correct_Ingredient_2");
-                    }
-                    else
-                    {
-                        AudioSingleton.instance?.PlaySFX("Correct_Ingredient_3");
-                    }
+                    AudioSingleton.PlaySFX(SoundEffect.CorrectIngredient);
                 }
             }
             else
             {
                 orderManager.SubtractPoints(10);
-                AudioSingleton.instance?.PlaySFX("Wrong_Ingredient");
+                AudioSingleton.PlaySFX(SoundEffect.WrongIngredient);
             }
         }
     }

@@ -133,6 +133,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "8cf4d76e-f5f5-4ca8-982d-bb425a7333b7",
+                    "path": "<Gamepad>/dpad/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Keys (WASD)",
                     "id": "61e30c2c-6cc8-4fad-a9a4-73bb3e962263",
                     "path": "1DAxis",
@@ -202,6 +213,17 @@
                     "name": "",
                     "id": "710af15e-1da6-4b5e-a738-575941461257",
                     "path": "<Gamepad>/leftStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d96ad9c3-96dc-4ab4-bb65-95fd87405a48",
+                    "path": "<Gamepad>/dpad/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

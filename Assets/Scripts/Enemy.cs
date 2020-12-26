@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerPathMover>()!=null&&canKill==true)
         {
             Debug.Log("Collided With Player");
-            AudioSingleton.instance?.PlaySFX("Lose_Life");
+            AudioSingleton.PlaySFX(SoundEffect.LifeLost);
             if(PlayerLives.Lives>1)
             {
                 PlayerLives.Lives = PlayerLives.Lives - 1;
@@ -39,14 +39,14 @@ public class Enemy : MonoBehaviour
             {
                 PlayerLives.Lives = 3;
                 SceneManager.LoadScene(5);
-                AudioSingleton.instance?.PlayBGM("Menu_BGM");
+                AudioSingleton.PlayBGM(BackgroundMusic.MainMenu);
             }
         }
         if(collision.GetComponent<Ingredients>())
         {
             if(collision.GetComponent<Ingredients>().GetFalling()==true&&canDie==true)
             {
-                AudioSingleton.instance?.PlaySFX("Squish_Enemy");
+                AudioSingleton.PlaySFX(SoundEffect.EnemySquished);
                 Score.score += 20;
                 Down();
             }

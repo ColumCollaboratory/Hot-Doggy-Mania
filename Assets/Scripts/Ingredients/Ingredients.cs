@@ -64,19 +64,7 @@ public class Ingredients : MonoBehaviour
         //If object is moving below map, then it 
         if(transform.position.y<-7)
         {
-            int randomSFX = Random.Range(0, 4);
-            if(randomSFX==0)
-            {
-                AudioSingleton.instance?.PlaySFX("Garbage_1");
-            }
-            else if(randomSFX==1)
-            {
-                AudioSingleton.instance?.PlaySFX("Garbage_2");
-            }
-            else
-            {
-                AudioSingleton.instance?.PlaySFX("Garbage_3");
-            }
+            AudioSingleton.PlaySFX(SoundEffect.GarbageBin);
             Destroy(this.gameObject);
         }
         //MOVE LEFT
@@ -130,20 +118,8 @@ public class Ingredients : MonoBehaviour
         }
         isFalling = true;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
-        int randomSFX = Random.Range(0, 4);
-        if (randomSFX == 0)
-        {
-            AudioSingleton.instance?.PlaySFX("Drop_Ingredient_1");
-        }
-        else if (randomSFX == 1)
-        {
-            AudioSingleton.instance?.PlaySFX("Drop_Ingredient_2");
-        }
-        else
-        {
-            AudioSingleton.instance?.PlaySFX("Drop_Ingredient_3");
-        }
-        AudioSingleton.instance?.PlaySFX("Drop_Ingredient_1");
+
+        AudioSingleton.PlaySFX(SoundEffect.DropIngredient);
     }
 
     public bool GetFalling()

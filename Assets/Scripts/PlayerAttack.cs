@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if(canAttack==true&&currentUses>0)
             {
-                AudioSingleton.instance?.PlaySFX("Spray_Enemy");
+                AudioSingleton.PlaySFX(SoundEffect.SpraySalt);
                 this.gameObject.GetComponentInChildren<Animator>().SetTrigger("Attack");
                 StartCoroutine("AttackTimeFrame");
                 StartCoroutine("AttackCooldown");
