@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2433515183483461281}
   - component: {fileID: 2433515183483461294}
   - component: {fileID: 2433515183483461295}
-  m_Layer: 5
-  m_Name: Canvas
+  m_Layer: 0
+  m_Name: GameplayCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,14 +30,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 2433515185009482613}
-  - {fileID: 2433515185174994398}
-  - {fileID: 2433515185309677907}
-  - {fileID: 2433515184504969422}
-  - {fileID: 2433515185224524566}
-  - {fileID: 2433515183514258602}
-  - {fileID: 2433515185366155999}
-  - {fileID: 2433515183547990906}
+  - {fileID: 6731534317093822057}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,7 +77,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -115,7 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2433515183514258602}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,14 +122,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515183514258603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2433515184379438056}
   - {fileID: 2433515184006132048}
   - {fileID: 2433515184044090973}
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7, y: 0.95}
@@ -153,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2433515183547990906}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Salts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,14 +160,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515183547990907}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2433515184305264608}
   - {fileID: 2433515184493707661}
   - {fileID: 2433515185077977543}
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9, y: 0.95}
@@ -193,7 +186,7 @@ GameObject:
   - component: {fileID: 2433515184006132048}
   - component: {fileID: 2433515184006132050}
   - component: {fileID: 2433515184006132051}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Life (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +260,7 @@ GameObject:
   - component: {fileID: 2433515184044090973}
   - component: {fileID: 2433515184044090975}
   - component: {fileID: 2433515184044090972}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Life (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +334,7 @@ GameObject:
   - component: {fileID: 2433515184305264608}
   - component: {fileID: 2433515184305264610}
   - component: {fileID: 2433515184305264611}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Salt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +408,7 @@ GameObject:
   - component: {fileID: 2433515184379438056}
   - component: {fileID: 2433515184379438058}
   - component: {fileID: 2433515184379438059}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -489,7 +482,7 @@ GameObject:
   - component: {fileID: 2433515184493707661}
   - component: {fileID: 2433515184493707663}
   - component: {fileID: 2433515184493707660}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Salt (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +556,7 @@ GameObject:
   - component: {fileID: 2433515184504969422}
   - component: {fileID: 2433515184504969408}
   - component: {fileID: 2433515184504969409}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Orders Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,11 +570,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515184504969423}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3, y: 0.95}
@@ -641,7 +634,7 @@ GameObject:
   - component: {fileID: 2433515185009482613}
   - component: {fileID: 2433515185009482615}
   - component: {fileID: 2433515185009482612}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -655,11 +648,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515185009482610}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.95}
@@ -719,7 +712,7 @@ GameObject:
   - component: {fileID: 2433515185077977543}
   - component: {fileID: 2433515185077977561}
   - component: {fileID: 2433515185077977542}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Salt (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +786,7 @@ GameObject:
   - component: {fileID: 2433515185174994398}
   - component: {fileID: 2433515185174994384}
   - component: {fileID: 2433515185174994385}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Score Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,11 +800,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515185174994399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.95}
@@ -871,7 +864,7 @@ GameObject:
   - component: {fileID: 2433515185224524566}
   - component: {fileID: 2433515185224524584}
   - component: {fileID: 2433515185224524585}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Lives Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,11 +878,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515185224524567}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6, y: 0.95}
@@ -949,7 +942,7 @@ GameObject:
   - component: {fileID: 2433515185309677907}
   - component: {fileID: 2433515185309677909}
   - component: {fileID: 2433515185309677906}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Orders Remaining Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,11 +956,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515185309677904}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.95}
@@ -1027,7 +1020,7 @@ GameObject:
   - component: {fileID: 2433515185366155999}
   - component: {fileID: 2433515185366155985}
   - component: {fileID: 2433515185366155998}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Salts Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1041,11 +1034,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2433515185366155996}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2433515183483461280}
+  m_Father: {fileID: 6731534317093822057}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8, y: 0.95}
@@ -1094,3 +1087,46 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Salt
+--- !u!1 &7458674755173412803
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6731534317093822057}
+  m_Layer: 0
+  m_Name: 16:9 Region
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6731534317093822057
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7458674755173412803}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2433515185009482613}
+  - {fileID: 2433515185174994398}
+  - {fileID: 2433515185309677907}
+  - {fileID: 2433515184504969422}
+  - {fileID: 2433515185224524566}
+  - {fileID: 2433515183514258602}
+  - {fileID: 2433515185366155999}
+  - {fileID: 2433515183547990906}
+  m_Father: {fileID: 2433515183483461280}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}

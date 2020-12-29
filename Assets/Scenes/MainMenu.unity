@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 194523029}
   - component: {fileID: 194523028}
   m_Layer: 0
-  m_Name: ResetScore
+  m_Name: Reset Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

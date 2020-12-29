@@ -32,7 +32,7 @@ public sealed class CreditsScroll : MonoBehaviour
     {
         if (isScrolling)
         {
-            currentScroll += scrollSpeed * Time.deltaTime;
+            currentScroll += scrollSpeed * Time.unscaledDeltaTime;
             if (currentScroll > scrollRangeY.max)
                 currentScroll -= scrollRangeY.Delta;
             scrollTransform.localPosition = new Vector3

@@ -80,12 +80,4 @@ public sealed class PlayerPathMover : PathMover
         if (ingredient != null)
             collidingWith.Remove(ingredient);
     }
-
-    public void Pause(InputAction.CallbackContext context)
-    {
-        if (context.ReadValueAsButton())
-            Application.Quit();
-    }
-
-    
 }
