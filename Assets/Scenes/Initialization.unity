@@ -10181,7 +10181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyParent: {fileID: 1554185692}
-  firstScene: MainMenu
+  firstScene: Main Menu
 --- !u!1 &1586031808
 GameObject:
   m_ObjectHideFlags: 0

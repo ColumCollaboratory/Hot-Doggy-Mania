@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -28,7 +26,7 @@ public abstract class PathMover : MonoBehaviour
     public void Activate()
     {
         pathingNetwork.OnNetworkChanged += OnNetworkChanged;
-        OnStart();
+        OnActivated();
     }
     #endregion
     #region Movement Methods
@@ -271,12 +269,12 @@ public abstract class PathMover : MonoBehaviour
     #endregion
     #region Subclass Specification
     /// <summary>
-    /// Defines how your mover will react if the path network is changed.
+    /// Defines how the mover will react if the path network is changed.
     /// </summary>
     protected abstract void OnNetworkChanged();
     /// <summary>
-    /// Override this method if your mover subclass needs to use Start.
+    /// Called when the pathing network has been updated for this mover.
     /// </summary>
-    protected virtual void OnStart() { }
+    protected virtual void OnActivated() { }
     #endregion
 }

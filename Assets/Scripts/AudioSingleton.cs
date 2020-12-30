@@ -35,6 +35,16 @@ public enum BackgroundMusic : byte
 /// </summary>
 public sealed class AudioSingleton : MonoBehaviour
 {
+    #region Fields
+    // Stores a directory of all audio tracks that can be queried.
+    private Dictionary<SoundEffect, AudioClip[]> sfxClips;
+    private Dictionary<BackgroundMusic, AudioClip> bgmClips;
+    // Stores state for the audio settings.
+    private bool sfxMuted, bgmMuted;
+    private float sfxVolume, bgmVolume;
+    // Stores the instance referred to by static members.
+    private static AudioSingleton instance;
+    #endregion
     #region Inspector Fields
     [Tooltip("The audio source the plays sound effects.")]
     [SerializeField] private AudioSource sfxSource = null;
@@ -61,63 +71,7 @@ public sealed class AudioSingleton : MonoBehaviour
         public AudioClip[] clips = null;
     }
     #endregion
-
-
-    private static AudioSingleton instance;
-    private Dictionary<SoundEffect, AudioClip[]> sfxClips;
-    private Dictionary<BackgroundMusic, AudioClip> bgmClips;
-    private float sfxVolume;
-    private float bgmVolume;
-    private bool sfxMuted;
-    private bool bgmMuted;
-    
-    public static float SFXVolume
-    {
-        get { return instance.sfxVolume; }
-        set
-        {
-            instance.sfxVolume = Mathf.Clamp01(value);
-            instance.sfxSource.volume = instance.sfxVolume;
-        }
-    }
-
-    public static float BGMVolume
-    {
-        get { return instance.bgmVolume; }
-        set
-        {
-            instance.bgmVolume = Mathf.Clamp01(value);
-            instance.bgmSource.volume = instance.bgmVolume;
-        }
-    }
-
-    public static bool BGMMuted
-    {
-        get { return instance.bgmMuted; }
-        set
-        {
-            instance.bgmMuted = value;
-            if (value)
-                instance.bgmSource.volume = 0f;
-            else
-                instance.bgmSource.volume = instance.bgmVolume;
-        }
-    }
-
-    public static bool SFXMuted
-    {
-        get { return instance.sfxMuted; }
-        set
-        {
-            instance.sfxMuted = value;
-            if (value)
-                instance.sfxSource.volume = 0f;
-            else
-                instance.sfxSource.volume = instance.sfxVolume;
-        }
-    }
-
-
+    #region Singleton Initialization
     private void Awake()
     {
         // Enforce singleton.
@@ -168,20 +122,89 @@ public sealed class AudioSingleton : MonoBehaviour
             bgmVolume = bgmSource.volume;
         }
     }
-
+    #endregion
+    #region Audio Settings Accessors
+    /// <summary>
+    /// The volume of the background music (from 0 to 1).
+    /// </summary>
+    public static float BGMVolume
+    {
+        get { return instance.bgmVolume; }
+        set
+        {
+            instance.bgmVolume = Mathf.Clamp01(value);
+            instance.bgmSource.volume = instance.bgmVolume;
+        }
+    }
+    /// <summary>
+    /// The volume of the sound effects (from 0 to 1).
+    /// </summary>
+    public static float SFXVolume
+    {
+        get { return instance.sfxVolume; }
+        set
+        {
+            instance.sfxVolume = Mathf.Clamp01(value);
+            instance.sfxSource.volume = instance.sfxVolume;
+        }
+    }
+    /// <summary>
+    /// Whether the background music is muted.
+    /// </summary>
+    public static bool BGMMuted
+    {
+        get { return instance.bgmMuted; }
+        set
+        {
+            instance.bgmMuted = value;
+            if (value)
+                instance.bgmSource.volume = 0f;
+            else
+                instance.bgmSource.volume = instance.bgmVolume;
+        }
+    }
+    /// <summary>
+    /// Whether the sound effects are muted.
+    /// </summary>
+    public static bool SFXMuted
+    {
+        get { return instance.sfxMuted; }
+        set
+        {
+            instance.sfxMuted = value;
+            if (value)
+                instance.sfxSource.volume = 0f;
+            else
+                instance.sfxSource.volume = instance.sfxVolume;
+        }
+    }
+    #endregion
+    #region Audio Playing Methods
+    /// <summary>
+    /// Plays a sound effect once.
+    /// </summary>
+    /// <param name="clip">The sound effect clip to play.</param>
     public static void PlaySFX(SoundEffect clip)
     {
         instance.sfxSource.PlayOneShot(
             instance.sfxClips[clip].RandomElement());
     }
+    /// <summary>
+    /// Changes the background music track.
+    /// </summary>
+    /// <param name="track">The new background track to play.</param>
     public static void PlayBGM(BackgroundMusic track)
     {
         StopBGM();
         instance.bgmSource.clip = instance.bgmClips[track];
         instance.bgmSource.Play();
     }
+    /// <summary>
+    /// Stops the current background music track.
+    /// </summary>
     public static void StopBGM()
     {
         instance.bgmSource.Stop();
     }
+    #endregion
 }

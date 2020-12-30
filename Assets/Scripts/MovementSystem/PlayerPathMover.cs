@@ -24,7 +24,7 @@ public sealed class PlayerPathMover : PathMover
         SnapToNearest(transform.position);
         Move(Vector2.zero);
     }
-    protected sealed override void OnStart()
+    protected sealed override void OnActivated()
     {
         collidingWith = new List<Ingredients>();
         OnNetworkChanged();

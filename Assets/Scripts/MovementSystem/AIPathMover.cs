@@ -66,7 +66,7 @@ public sealed class AIPathMover : PathMover
             Move(travel);
         }
     }
-    protected sealed override void OnStart()
+    protected sealed override void OnActivated()
     {
         SnapToNearest(transform.position);
     }
