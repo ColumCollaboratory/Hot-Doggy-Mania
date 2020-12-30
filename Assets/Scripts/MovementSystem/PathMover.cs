@@ -11,6 +11,8 @@ public abstract class PathMover : MonoBehaviour
     [SerializeField] protected PathingNetwork pathingNetwork;
     [Range(0f, 5f)][Tooltip("The distance the player can be from a path and still snap to it.")]
     [SerializeField] private float junctionTolerance = 0.5f;
+    [Range(0f, 5f)][Tooltip("Determines how close the mover can get to walls.")]
+    [SerializeField] private float moverWidth = 0.5f;
     #endregion
     #region Current State Properties
     /// <summary>
@@ -46,7 +48,7 @@ public abstract class PathMover : MonoBehaviour
                 // Not looking to switch junctions:
                 if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                 {
-                    CurrentDistance = Mathf.Clamp(CurrentDistance + direction.x, 0, CurrentPath.length);
+                    CurrentDistance = Mathf.Clamp(CurrentDistance + direction.x, 0 + moverWidth, CurrentPath.length - moverWidth);
                     transform.position = GetLocation();
                 }
                 // Looking to switch junctions.

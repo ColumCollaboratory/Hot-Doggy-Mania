@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathingNetwork: {fileID: 0}
   junctionTolerance: 0.5
+  moverWidth: 0.25
   walkSpeed: 4
   climbSpeed: 3
 --- !u!114 &8455329188531999325
@@ -226,6 +227,9 @@ MonoBehaviour:
   attackCD: 2
   maxUses: 3
   attackTimeFrame: 0.5
+  saltOne: {fileID: 0}
+  saltTwo: {fileID: 0}
+  saltThree: {fileID: 0}
 --- !u!1 &133168840753246516
 GameObject:
   m_ObjectHideFlags: 0
