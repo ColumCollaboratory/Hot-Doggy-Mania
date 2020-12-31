@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2134656583
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c104aeb76bbb3c4fa954d370183c529, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: creamCheese
   distanceBetweenConveyers: 4
-  fallingSpeed: 4.49
   isSalt: 0
+  fallingSpeed: 1.5
 --- !u!61 &4869480322433586444
 BoxCollider2D:
   m_ObjectHideFlags: 0

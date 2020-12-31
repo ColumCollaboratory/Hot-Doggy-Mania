@@ -11,16 +11,19 @@ public class Ingredients : MonoBehaviour
     [SerializeField]
     private float distanceBetweenConveyers = 4;
     [SerializeField]
-    private float fallingSpeed = 1;
-    [SerializeField]
     private bool isSalt=false;
+    [SerializeField]
+    private float fallingSpeed;
 
     private GameObject storedPlayer;
     private float conveyerSpeed = 2;
+    private float gravityScale;
     private Vector2 nextPosition;
     private bool isFalling = false;
     private bool canFall = false;
     private bool isMovingLeft;
+
+    private Conveyor currentConveyor;
 
     private BoxCollider2D notTriggerCollider;
 
@@ -41,85 +44,42 @@ public class Ingredients : MonoBehaviour
             }
         }
     }
-    
+
+    private void Awake()
+    {
+        gravityScale = fallingSpeed;
+        isFalling = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(isFalling==true)
+        if(currentConveyor!=null)
         {
-            FallingMovement();
-        }
-        else
-        {
+            isFalling = false;
             MoveOnConveyer();
         }
     }
 
-    private void FallingMovement()
-    {
-        /*if (this.transform.position.y >= nextPosition.y)
-        {
-            
-            //transform.Translate(new Vector2(0, -1) * Time.deltaTime * fallingSpeed);
-        }
-        else
-        {
-            isFalling = false;
-        }*/
-    }
-
     private void MoveOnConveyer()
     {
-        //TONS of hard coding here. Should probably fix.
-
-        //If object is moving below map, then it 
+        //If object is moving below map, then remove it 
         if(transform.position.y<-7)
         {
             AudioSingleton.PlaySFX(SoundEffect.GarbageBin);
             Destroy(this.gameObject);
         }
-        //MOVE LEFT
-        if(isFalling==false)
+        if(isFalling==false&&currentConveyor)
         {
-            if (isMovingLeft == true)
+            //transform.Translate(new Vector2(1, 0) * Time.deltaTime * currentConveyor.speed);
+            transform.position = new Vector2(transform.position.x + currentConveyor.speed * Time.deltaTime, transform.position.y);
+            float x = transform.position.x;
+            x.Wrap(currentConveyor.start, currentConveyor.end);
+            if(x!=transform.position.x)
             {
-                transform.Translate(new Vector2(-1, 0) * Time.deltaTime * conveyerSpeed);
-                //Teleport to other side of screen when offscreen
-                if (transform.position.x < -23)
-                {
-                    transform.position = new Vector2(23, transform.position.y);
-                }
-            }
-            else
-            {
-                transform.Translate(new Vector2(1, 0) * Time.deltaTime * conveyerSpeed);
-                //Teleport to other side of screen when offscreen
-                if (transform.position.x > 23)
-                {
-                    transform.position = new Vector2(-23, transform.position.y);
-                }
+                transform.position = new Vector2(x, transform.position.y);
             }
         }
-       /*
-        if (transform.position.y<-4||(transform.position.y>0&&transform.position.y<3)||transform.position.y>8)
-        {
-            transform.Translate(new Vector2(-1, 0) * Time.deltaTime * conveyerSpeed);
-            //Teleport to other side of screen when offscreen
-            if (transform.position.x < -23)
-            {
-                transform.position = new Vector2(23, transform.position.y);
-            }
-        }
-        else //MOVE RIGHT
-        {
-            transform.Translate(new Vector2(1,0) * Time.deltaTime * conveyerSpeed);
-            //Teleport to other side of screen when offscreen
-            if (transform.position.x > 23)
-            {
-                transform.position = new Vector2(-23, transform.position.y);
-            }
-        }
-        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -146,13 +106,17 @@ public class Ingredients : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isFalling = false;
-        if (collision.gameObject.CompareTag("conveyorLeft"))
+        if(collision.gameObject.GetComponent<Conveyor>())
         {
-            isMovingLeft = true;
+            currentConveyor = collision.gameObject.GetComponent<Conveyor>();
         }
-        else if (collision.gameObject.CompareTag("conveyorRight"))
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Conveyor>())
         {
-            isMovingLeft = false;
+            currentConveyor = null;
         }
     }
 
@@ -165,6 +129,7 @@ public class Ingredients : MonoBehaviour
                     StartCoroutine(ToggleCollider(notTriggerCollider));
         }
         isFalling = true;
+        this.GetComponent<Rigidbody2D>().gravityScale=gravityScale;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
 
         AudioSingleton.PlaySFX(SoundEffect.DropIngredient);
