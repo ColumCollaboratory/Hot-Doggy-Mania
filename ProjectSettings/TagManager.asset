@@ -49,6 +49,9 @@ TagManager:
   - name: Ladders
     uniqueID: 2501300041
     locked: 0
+  - name: Walkways
+    uniqueID: 2344505583
+    locked: 0
   - name: Player
     uniqueID: 2577745113
     locked: 0
