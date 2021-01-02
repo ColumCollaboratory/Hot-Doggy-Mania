@@ -131,6 +131,29 @@ public abstract class PathMover : MonoBehaviour
     protected bool TryFindRoute(Vector2 target, out Vector2[] path)
     {
         FindSnap(target, out Path nearPath, out float nearDistance);
+
+        // TODO This is a hotfix! Fix this edge case in A* implementation.
+        if (nearPath == CurrentPath)
+        {
+            if (nearPath.axis == Axis.Horizontal)
+            {
+                path = new Vector2[]
+                {
+                    transform.position,
+                    nearPath.start + Vector2.right * nearDistance
+                };
+            }
+            else
+            {
+                path = new Vector2[]
+                {
+                    transform.position,
+                    nearPath.start + Vector2.up * nearDistance
+                };
+            }
+            return true;
+        }
+
         if (AStarPathFind(nearPath, nearDistance, out Vector2[] foundPath))
         {
             path = foundPath;
