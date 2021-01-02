@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -53,7 +54,27 @@ public sealed class MainMenuInteraction : MonoBehaviour
 
     private bool isFullscreen;
     private bool inGame;
+
     private bool isPaused;
+    private bool IsPaused
+    {
+        get { return isPaused; }
+        set
+        {
+            if (isPaused != value)
+            {
+                isPaused = value;
+                if (isPaused)
+                    OnPaused?.Invoke();
+                else
+                    OnResumed?.Invoke();
+            }
+        }
+    }
+
+    public static event Action OnPaused;
+    public static event Action OnResumed;
+
 
     private void Awake()
     {
@@ -63,7 +84,7 @@ public sealed class MainMenuInteraction : MonoBehaviour
     public void MainMenuSceneLoaded()
     {
         inGame = false;
-        isPaused = false;
+        IsPaused = false;
         menuCanvas.GetComponent<GraphicRaycaster>().enabled = true;
         pauseAnimator.SetBool("isPaused", true);
         titleAnimator.SetBool("isPaused", true);
@@ -99,7 +120,7 @@ public sealed class MainMenuInteraction : MonoBehaviour
         else
         {
             inGame = true;
-            isPaused = false;
+            IsPaused = false;
             SceneManager.LoadScene(firstStageScene);
             AudioSingleton.PlayBGM(BackgroundMusic.Gameplay);
             pauseAnimator.SetBool("isPaused", false);
@@ -114,8 +135,8 @@ public sealed class MainMenuInteraction : MonoBehaviour
     {
         if (inGame)
         {
-            isPaused = !isPaused;
-            if (isPaused)
+            IsPaused = !IsPaused;
+            if (IsPaused)
             {
                 pauseAnimator.SetBool("isPaused", true);
                 titleAnimator.SetBool("isPaused", true);
