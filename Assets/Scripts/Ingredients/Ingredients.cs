@@ -83,16 +83,16 @@ public class Ingredients : Interactable
             isFalling = false;
             MoveOnConveyer();
         }
-    }
-
-    private void MoveOnConveyer()
-    {
         //If object is moving below map, then remove it 
-        if(transform.position.y<-7)
+        else if (transform.position.y < -7)
         {
             AudioSingleton.PlaySFX(SoundEffect.GarbageBin);
             Destroy(this.gameObject);
         }
+    }
+
+    private void MoveOnConveyer()
+    {
         if(isFalling==false&&currentConveyor)
         {
             //transform.Translate(new Vector2(1, 0) * Time.deltaTime * currentConveyor.speed);
@@ -154,6 +154,7 @@ public class Ingredients : Interactable
             
                     StartCoroutine(ToggleCollider(notTriggerCollider));
         }
+        currentConveyor = null;
         isFalling = true;
         this.GetComponent<Rigidbody2D>().gravityScale=gravityScale;
         nextPosition = new Vector2(0, this.transform.position.y - distanceBetweenConveyers);
