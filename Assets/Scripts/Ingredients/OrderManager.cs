@@ -62,10 +62,8 @@ public class OrderManager : MonoBehaviour
         Debug.Log("Orders Needed: " + ordersNeeded);
         Debug.Log("Orders completed: " + ordersCompleted);
         Debug.Log("Orders On Screen: " + ordersOnScreen);
-        if (ordersNeeded>=ordersCompleted+ordersOnScreen)
-        {
             StartCoroutine(WaitToSpawn(orderLocation));
-        }
+        
     }
 
     IEnumerator WaitToSpawn(Vector2 orderLocation)
