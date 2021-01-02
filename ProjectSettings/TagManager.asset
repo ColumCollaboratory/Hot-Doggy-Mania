@@ -46,11 +46,11 @@ TagManager:
   - name: Background
     uniqueID: 1884754993
     locked: 0
-  - name: Player
-    uniqueID: 2577745113
-    locked: 0
   - name: Ladders
     uniqueID: 2501300041
+    locked: 0
+  - name: Player
+    uniqueID: 2577745113
     locked: 0
   - name: Ingredients
     uniqueID: 2134656583
