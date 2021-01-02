@@ -58,11 +58,16 @@ public sealed class AIPathMover : PathMover
             if (travel.magnitude > direction.magnitude)
                 currentPathIndex++;
 
+            for (int i = 1; i < currentPath.Length; i++)
+                Debug.DrawLine(currentPath[i], currentPath[i - 1], Color.cyan);
+
+            /*
             Debug.DrawRay(transform.position, travel, Color.green, 1);
             Debug.DrawRay(currentPath[currentPathIndex], Vector3.up * 0.25f, Color.blue);
             Debug.DrawRay(currentPath[currentPathIndex], Vector3.down * 0.25f, Color.blue);
             Debug.DrawRay(currentPath[currentPathIndex], Vector3.left * 0.25f, Color.blue);
             Debug.DrawRay(currentPath[currentPathIndex], Vector3.right * 0.25f, Color.blue);
+            */
             Move(travel);
         }
     }
