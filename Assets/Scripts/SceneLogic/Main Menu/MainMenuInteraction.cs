@@ -115,7 +115,7 @@ public sealed class MainMenuInteraction : MonoBehaviour
 
     public void OnPlayPressed()
     {
-        if (inGame)
+        if (inGame&&SceneManager.GetActiveScene().name!="Tutorial")
             OnPausePressed();
         else
             StartStage(firstStageScene);
