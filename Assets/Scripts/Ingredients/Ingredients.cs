@@ -13,7 +13,8 @@ public enum IngredientType : byte
     Ketchup,
     Mustard,
     PeanutButter,
-    Jelly
+    Jelly,
+    Salt
 }
 
 public class Ingredients : MonoBehaviour
