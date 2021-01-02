@@ -13,7 +13,7 @@ public sealed class IngredientSpawner : MonoBehaviour
 
 
     private Dictionary<IngredientType, GameObject> ingredientPrefabs;
-
+#if DEBUG
     private void OnValidate()
     {
         spawnInterval.Clamp(0f, float.MaxValue);
@@ -22,6 +22,7 @@ public sealed class IngredientSpawner : MonoBehaviour
             directory.inspectorName =
                 ObjectNames.NicifyVariableName(directory.ingredient.ToString());
     }
+#endif
 
     [System.Serializable]
     private sealed class IngredientPrefabDirectory

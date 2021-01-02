@@ -12,14 +12,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 60b8a090750617e46b1559ab6a7517c3
   - enabled: 1
-    path: Assets/Scenes/IanTestScene.unity
-    guid: de6029a963cf1e04194bc83ba577cb8b
+    path: Assets/Scenes/level1.unity
+    guid: a065162d7da4b26478bcc4715798de25
+  - enabled: 1
+    path: Assets/Scenes/level1_2.unity
+    guid: aa9f93a85ae402d4a87e259d50c5d312
   - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: 90e866c3a34017448846fcc1e3f156aa
   - enabled: 1
+    path: Assets/Scenes/level2_2.unity
+    guid: 8be92685c4f0925419349a81cde5edeb
+  - enabled: 1
+    path: Assets/Scenes/level2_3.unity
+    guid: c8341897a49e41646a719137497850ea
+  - enabled: 1
     path: Assets/Scenes/level3.unity
     guid: 361609623478e1c4eb05ca97e4ba201b
+  - enabled: 1
+    path: Assets/Scenes/level3_2.unity
+    guid: 8347fbe965ab61d4f81110601443b23d
   - enabled: 1
     path: Assets/Scenes/Win Screen.unity
     guid: f4808beeae6c4f445b2557fcc7566476
@@ -29,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: c222c41e3dd33334bbecbb7d76935dcd
+  - enabled: 0
+    path: Assets/Scenes/IanTestScene.unity
+    guid: de6029a963cf1e04194bc83ba577cb8b
   m_configObjects: {}

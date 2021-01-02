@@ -2750,7 +2750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ordersOnScreen: 4
-  ordersNeeded: 4
+  ordersNeeded: 3
   orderPrefabs:
   - {fileID: 5280552223073454888, guid: 012fb6e1f4a88f3429c05a7790b8b1a8, type: 3}
   - {fileID: 8925040264938030935, guid: 683df64af638ab6419bdd773d77b4825, type: 3}
