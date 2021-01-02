@@ -164,9 +164,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathingNetwork: {fileID: 0}
   junctionTolerance: 0.5
+  moverWidth: 0
   target: {fileID: 0}
   speed: 1
   repathFrequency: 1
+  targetDeviation: 0
 --- !u!61 &1677599883897600470
 BoxCollider2D:
   m_ObjectHideFlags: 0
