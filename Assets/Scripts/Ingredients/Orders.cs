@@ -14,7 +14,7 @@ public class Orders : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        orderManager = GameObject.Find("OrderManager").GetComponent<OrderManager>();
+        orderManager = FindObjectOfType<OrderManager>();  
     }
 
     // Update is called once per frame

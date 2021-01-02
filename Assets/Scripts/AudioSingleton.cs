@@ -186,8 +186,9 @@ public sealed class AudioSingleton : MonoBehaviour
     /// <param name="clip">The sound effect clip to play.</param>
     public static void PlaySFX(SoundEffect clip)
     {
-        instance.sfxSource.PlayOneShot(
-            instance.sfxClips[clip].RandomElement());
+        if (instance != null)
+            instance.sfxSource.PlayOneShot(
+                instance.sfxClips[clip].RandomElement());
     }
     /// <summary>
     /// Changes the background music track.
@@ -195,16 +196,20 @@ public sealed class AudioSingleton : MonoBehaviour
     /// <param name="track">The new background track to play.</param>
     public static void PlayBGM(BackgroundMusic track)
     {
-        StopBGM();
-        instance.bgmSource.clip = instance.bgmClips[track];
-        instance.bgmSource.Play();
+        if (instance != null)
+        {
+            StopBGM();
+            instance.bgmSource.clip = instance.bgmClips[track];
+            instance.bgmSource.Play();
+        }
     }
     /// <summary>
     /// Stops the current background music track.
     /// </summary>
     public static void StopBGM()
     {
-        instance.bgmSource.Stop();
+        if (instance != null)
+            instance.bgmSource.Stop();
     }
     #endregion
 }

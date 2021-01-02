@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum IngredientType : byte
+{
+    CreamCheese,
+    Onion,
+    GrilledOnion,
+    Pepper,
+    Pickle,
+    Tomato,
+    Ketchup,
+    Mustard,
+    PeanutButter,
+    Jelly
+}
+
 public class Ingredients : MonoBehaviour
 {
 

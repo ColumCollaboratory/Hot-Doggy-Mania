@@ -1,5 +1,9 @@
 ﻿using System;
+using UnityEngine;
 
+/// <summary>
+/// Provides utility extension methods for floats.
+/// </summary>
 public static class FloatExtensions
 {
     /// <summary>
@@ -19,5 +23,15 @@ public static class FloatExtensions
             value += range;
         while (value > max)
             value -= range;
+    }
+    /// <summary>
+    /// Clamps a floating point value in place into the given range.
+    /// </summary>
+    /// <param name="value">The value to clamp.</param>
+    /// <param name="min">The minimum value for the float.</param>
+    /// <param name="max">The maximum value for the float.</param>
+    public static void Clamp(this ref float value, float min, float max)
+    {
+        value = Mathf.Clamp(value, min, max);
     }
 }
