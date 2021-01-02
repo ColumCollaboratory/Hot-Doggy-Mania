@@ -150,7 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downTimer: 5
-  livesManager: {fileID: 0}
 --- !u!114 &3820178121661965972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathingNetwork: {fileID: 0}
   junctionTolerance: 0.5
+  moverWidth: 0
   target: {fileID: 0}
   speed: 1
   repathFrequency: 1

@@ -60,7 +60,7 @@ public sealed class PlayerPathMover : PathMover
         if (context.ReadValueAsButton())
         {
             foreach (Ingredients ingredient in collidingWith)
-                if (!ingredient.GetFalling())
+                if (!ingredient.GetFalling()&&ingredient!=null)
                     ingredient.Fall();
         }
     }
