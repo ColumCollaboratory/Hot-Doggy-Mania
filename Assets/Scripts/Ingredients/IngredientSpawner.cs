@@ -67,19 +67,18 @@ public sealed class IngredientSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnIngredient(IngredientType toSpawn)
+    public Ingredients SpawnIngredient(IngredientType toSpawn)
     {
 #if DEBUG
         if (!ingredientPrefabs.ContainsKey(toSpawn))
         {
             Debug.LogError($"The requested ingredient {toSpawn} is not available in the spawner.");
-            return;
+            return null;
         }
 #endif
-
-
         GameObject newIngredient = Instantiate(ingredientPrefabs[toSpawn], gameObject.transform.position, new Quaternion());
         newIngredient.GetComponent<Ingredients>().Fall();
+        return newIngredient.GetComponent<Ingredients>();
     }
 
 

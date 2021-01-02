@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +18,13 @@ public enum IngredientType : byte
     Salt
 }
 
-public class Ingredients : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
+{
+    public abstract event Action InteractedWith;
+}
+
+
+public class Ingredients : Interactable
 {
 
     [SerializeField]
@@ -41,6 +48,8 @@ public class Ingredients : MonoBehaviour
     private Conveyor currentConveyor;
 
     private BoxCollider2D notTriggerCollider;
+
+    public override event Action InteractedWith;
 
     public string GetName()
     {
@@ -139,6 +148,8 @@ public class Ingredients : MonoBehaviour
     {
         if (storedPlayer != null)
         {
+            InteractedWith?.Invoke();
+
             storedPlayer.gameObject.GetComponent<Animator>().SetTrigger("Push");
             
                     StartCoroutine(ToggleCollider(notTriggerCollider));

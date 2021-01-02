@@ -118,17 +118,20 @@ public sealed class MainMenuInteraction : MonoBehaviour
         if (inGame)
             OnPausePressed();
         else
-        {
-            inGame = true;
-            IsPaused = false;
-            SceneManager.LoadScene(firstStageScene);
-            AudioSingleton.PlayBGM(BackgroundMusic.Gameplay);
-            pauseAnimator.SetBool("isPaused", false);
-            titleAnimator.SetBool("isPaused", false);
-            Time.timeScale = 1f;
-            menuCanvas.GetComponent<GraphicRaycaster>().enabled = false;
-            controlEventSystem.SetSelectedGameObject(null);
-        }
+            StartStage(firstStageScene);
+    }
+
+    private void StartStage(string stageName)
+    {
+        inGame = true;
+        IsPaused = false;
+        SceneManager.LoadScene(stageName);
+        AudioSingleton.PlayBGM(BackgroundMusic.Gameplay);
+        pauseAnimator.SetBool("isPaused", false);
+        titleAnimator.SetBool("isPaused", false);
+        Time.timeScale = 1f;
+        menuCanvas.GetComponent<GraphicRaycaster>().enabled = false;
+        controlEventSystem.SetSelectedGameObject(null);
     }
 
     public void OnPausePressed()
@@ -178,11 +181,7 @@ public sealed class MainMenuInteraction : MonoBehaviour
     }
     public void ShowInstructions()
     {
-        AudioSingleton.PlaySFX(SoundEffect.CloseCredits);
-        titlePanel.SetActive(false);
-        instructionsPanel.SetActive(true);
-        titleAnimator.SetTrigger("MinimizeTitle");
-        controlEventSystem.SetSelectedGameObject(instructionsDefaultFocus);
+        StartStage("Tutorial");
     }
     public void ShowSettings()
     {
