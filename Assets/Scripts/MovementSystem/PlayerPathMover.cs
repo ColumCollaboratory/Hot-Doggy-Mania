@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -69,7 +70,10 @@ public sealed class PlayerPathMover : PathMover
     {
         if (context.ReadValueAsButton())
         {
-            Debug.Log("HI MOM");
+            if (SceneManager.GetActiveScene().buildIndex < 9)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
 
@@ -77,7 +81,10 @@ public sealed class PlayerPathMover : PathMover
     {
         if (context.ReadValueAsButton())
         {
-            Debug.Log("Bye MOM");
+            if (SceneManager.GetActiveScene().buildIndex > 2)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            }
         }
     }
 

@@ -10120,6 +10120,91 @@ PrefabInstance:
       propertyPath: saltThree
       value: 
       objectReference: {fileID: 2433515184223537866}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 1f096c35-d121-4a9c-897a-0d2dbb527968
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Gameplay/SkipLevel[/Keyboard/p]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: fb811043-bd8e-4662-84f9-6a25af6d199c
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Gameplay/LevelBack[/Keyboard/o]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1479386246}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SkipLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1479386246}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PreviousLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8455329188531999325, guid: d2ac1b37b15fdc141821ac87199f7262,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2ac1b37b15fdc141821ac87199f7262, type: 3}
 --- !u!1001 &1677599883573486648
