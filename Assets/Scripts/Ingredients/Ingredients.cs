@@ -176,6 +176,8 @@ public class Ingredients : Interactable
     {
         collider.enabled = false;
         yield return new WaitForSeconds(0.5f);
+        //If player pushes on a ladder, will reset the trigger after a set time so that the animation doesn't play when exiting the ladder
+        storedPlayer.gameObject.GetComponent<Animator>().ResetTrigger("Push");
         collider.enabled = true;
     }
 }
