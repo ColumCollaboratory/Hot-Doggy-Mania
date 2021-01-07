@@ -59,6 +59,11 @@ public class Ingredients : Interactable
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    private void Awake()
+    {
         BoxCollider2D[] colliders = this.GetComponents<BoxCollider2D>();
         foreach (BoxCollider2D collider in colliders)
         {
@@ -67,10 +72,7 @@ public class Ingredients : Interactable
                 notTriggerCollider = collider;
             }
         }
-    }
 
-    private void Awake()
-    {
         gravityScale = fallingSpeed;
         isFalling = true;
     }

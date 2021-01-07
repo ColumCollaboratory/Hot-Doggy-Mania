@@ -65,6 +65,22 @@ public sealed class PlayerPathMover : PathMover
         }
     }
 
+    public void SkipLevel(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            Debug.Log("HI MOM");
+        }
+    }
+
+    public void PreviousLevel(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            Debug.Log("Bye MOM");
+        }
+    }
+
     private List<Ingredients> collidingWith;
 
     private void OnTriggerEnter2D(Collider2D other)
