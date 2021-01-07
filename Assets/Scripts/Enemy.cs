@@ -32,13 +32,14 @@ public class Enemy : MonoBehaviour
             AudioSingleton.PlaySFX(SoundEffect.LifeLost);
             if(PlayerLives.Lives>1)
             {
-                PlayerLives.Lives = PlayerLives.Lives - 1;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Score.score -= 30;
+                StartCoroutine(DownPlayer(collision.gameObject));
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             else
             {
                 PlayerLives.Lives = 3;
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene(10);
                 AudioSingleton.PlayBGM(BackgroundMusic.MainMenu);
             }
         }
@@ -75,5 +76,18 @@ public class Enemy : MonoBehaviour
         canDie = true;
         canKill = true;
         gameObject.GetComponentInParent<AIPathMover>().enabled = true;
+    }
+
+    IEnumerator DownPlayer(GameObject player)
+    {
+        PlayerLives.Lives = PlayerLives.Lives - 1;
+        player.GetComponent<BoxCollider2D>().enabled = false;
+        Color ghostPlayer = player.GetComponentInChildren<SpriteRenderer>().color;
+        ghostPlayer.a = 0.4f;
+        player.GetComponentInChildren<SpriteRenderer>().color = ghostPlayer;
+        yield return new WaitForSeconds(5);
+        ghostPlayer.a = 1;
+        player.GetComponentInChildren<SpriteRenderer>().color = ghostPlayer;
+        player.GetComponent<BoxCollider2D>().enabled = true;
     }
 }
