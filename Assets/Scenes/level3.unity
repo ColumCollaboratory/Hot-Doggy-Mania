@@ -11793,7 +11793,7 @@ PrefabInstance:
     - target: {fileID: 2328348113456038050, guid: 2df8184c121596f43adefdb312ba09c0,
         type: 3}
       propertyPath: showJunctions
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3087292664162049913, guid: 2df8184c121596f43adefdb312ba09c0,
         type: 3}
