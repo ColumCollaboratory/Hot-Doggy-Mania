@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -62,6 +63,28 @@ public sealed class PlayerPathMover : PathMover
             foreach (Ingredients ingredient in collidingWith)
                 if (!ingredient.GetFalling()&&ingredient!=null)
                     ingredient.Fall();
+        }
+    }
+
+    public void SkipLevel(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            if (SceneManager.GetActiveScene().buildIndex < 9)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        }
+    }
+
+    public void PreviousLevel(InputAction.CallbackContext context)
+    {
+        if (context.ReadValueAsButton())
+        {
+            if (SceneManager.GetActiveScene().buildIndex > 2)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            }
         }
     }
 

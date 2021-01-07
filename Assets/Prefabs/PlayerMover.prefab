@@ -159,6 +159,36 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0fdbe210-f033-461e-a467-9d3c57576cf6
     m_ActionName: Gameplay/Mute[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 133168839755159606}
+        m_MethodName: SkipLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f096c35-d121-4a9c-897a-0d2dbb527968
+    m_ActionName: Gameplay/SkipLevel[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 133168839755159606}
+        m_MethodName: PreviousLevel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fb811043-bd8e-4662-84f9-6a25af6d199c
+    m_ActionName: Gameplay/PreviousLevel[/Keyboard/o]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -300,7 +330,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1717222183
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3046367371666695316, guid: e38d17393c674a14291e05e55c6e8442,
     type: 3}
@@ -445,7 +475,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1717222183
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2177eab62605de7429ebe8a2a4e80a8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
