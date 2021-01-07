@@ -32,14 +32,14 @@ public class OrderManager : MonoBehaviour
         ordersCompleted = 0;
         ordersRemainingText.text = (ordersNeeded - ordersCompleted).ToString();
         //If manually putting in starting prefabs, comment this out
-        /*for(int x=0;x<ordersOnScreen;x++)
+        for(int x=0;x<ordersOnScreen;x++)
         {
             Debug.Log("Spawn order");
             //Stores a random prefab from the list
             int randomPrefab = Random.Range(0, orderPrefabs.Count);
             //Instantiates at spawner equal to current X value (first order spawns at location 1)
             Instantiate(orderPrefabs[randomPrefab], orderSpawnLocations[x].position,new Quaternion());
-        }*/
+        }
     }
 
     public void SpawnNewOrder(Vector3 orderLocation)
