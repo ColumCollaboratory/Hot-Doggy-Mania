@@ -151,9 +151,8 @@ public class Ingredients : Interactable
             InteractedWith?.Invoke();
 
             storedPlayer.gameObject.GetComponent<Animator>().SetTrigger("Push");
-            
-                    StartCoroutine(ToggleCollider(notTriggerCollider));
         }
+        StartCoroutine(ToggleCollider(notTriggerCollider));
         currentConveyor = null;
         isFalling = true;
         this.GetComponent<Rigidbody2D>().gravityScale=gravityScale;
@@ -177,7 +176,10 @@ public class Ingredients : Interactable
         collider.enabled = false;
         yield return new WaitForSeconds(0.5f);
         //If player pushes on a ladder, will reset the trigger after a set time so that the animation doesn't play when exiting the ladder
-        storedPlayer.gameObject.GetComponent<Animator>().ResetTrigger("Push");
+        if(storedPlayer!=null)
+        {
+            storedPlayer.gameObject.GetComponent<Animator>().ResetTrigger("Push");
+        }
         collider.enabled = true;
     }
 }
