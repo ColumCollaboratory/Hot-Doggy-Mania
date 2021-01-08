@@ -19,7 +19,7 @@ public class EndScreen : MonoBehaviour
 
     public void ReturnMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void ExitGame()
